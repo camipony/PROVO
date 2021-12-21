@@ -59,7 +59,7 @@ export default class index extends Component {
                 return <div className='modalContainer' onClick={this.modal}>
                     
                     <div className='modal'>
-                        <h2>Delles Factura</h2>
+                        <h2>Detalles Factura</h2>
                         <div className='detallerFactura'>
                         
                         </div>
@@ -94,7 +94,7 @@ export default class index extends Component {
 
             <div className="contetFormFact">
                 <div className='formDetallTienda detallFactTien'>
-                    <h1>Deatalles  Tienda</h1>
+                    <h1>Detalles  Tienda</h1>
                     <div className='contInput extends'>
                         <input 
                             type="text" 
@@ -125,7 +125,7 @@ export default class index extends Component {
                     
                 </div>
                 <div className='formDetallFactura detallFactTien'>
-                    <h1>Deatalles  Factura</h1>
+                    <h1>Detalles  Factura</h1>
                     <div className='contInput'>
                         <label># Factura</label>
                         <p>10254875621455</p>
