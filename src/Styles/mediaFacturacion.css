@@ -1,0 +1,22 @@
+
+/* Ajuste al cambio de pantalla (@media) */
+@media (max-width: 890px){
+    .contetFormFact{
+        flex-direction: column;
+    }
+
+    .detallFactTien{
+        width: 90%;
+    }
+
+}
+
+@media (max-width: 500px){
+    .contetFormFact{
+        width: 100%;
+    }
+
+    .formDetallFactura .contInput p {
+        width: 350px;
+    }
+}

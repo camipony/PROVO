@@ -1,8 +1,9 @@
 import './Styles/App.css';
+import Facturacion from './Components/Facturacion'
 
 function App() {
   return <div className="App">
-      <h1>Hello World!!</h1>
+      <Facturacion/>
     </div>
 }
 
