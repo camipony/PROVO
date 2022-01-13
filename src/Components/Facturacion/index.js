@@ -88,7 +88,10 @@ export default class index extends Component {
                 <img src="https://cdn.discordapp.com/attachments/911076621333692456/913617361842602034/3.png" atl="../" ></img>
             </div>*/}
 
-            <div className="conteTitleFactueacion">
+            <div className="conteTitleFactueacion" id='topFacturacion'>
+                <button className='backToHome'>
+                    <ion-icon name="home-outline"></ion-icon>
+                </button>
                 <h1  > Facturacion </h1>
             </div>
 
@@ -145,7 +148,10 @@ export default class index extends Component {
             </div>
 
             <div className='btnFinalizarCompra'>
-                <button onClick={this.modal.bind(this, "compra")}> FINALIZAR COMPRA </button>
+                <a href='#topFacturacion' className='backTop'>
+                    <ion-icon name="caret-up-outline"></ion-icon>
+                </a>
+                <button className='btnFinCompra' onClick={this.modal.bind(this, "compra")}> FINALIZAR COMPRA </button>
             </div>
 
             <div className="contProductFact">

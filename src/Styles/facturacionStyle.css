@@ -8,20 +8,40 @@
 }
 /* Inicio Style Titulo */
 .conteTitleFactueacion{
+    position: fixed;
     width: 100%;
     padding-top: 10px;
-    padding-bottom: 10px;
+    padding-bottom: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
+    background: rgb(100, 122, 243);
 }
 
 .conteTitleFactueacion h1{
     font-size: 3em;
+    padding: 2px 30px;
+    padding-top: 0;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.233);
+    background: rgba(239, 223, 223, 38%);
+}
+
+.conteTitleFactueacion .backToHome{
+    position: absolute;
+    left: 50px;
+    font-size: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    padding: 5px;
+    border: none;
 }
 
 /* Inicio Style Form */
 .contetFormFact{
+    margin-top: 70px;
     width: 90%;
     padding: 10px;
     display: flex;
@@ -118,13 +138,20 @@
 
 /* Inicio Style button FinalizarCompra */
 .btnFinalizarCompra{
-    width: 100%;
+    position: fixed;
+    bottom: 5px;
+    width: 95%;
     padding: 10px 15px;
     margin-bottom: 5px;
-    text-align: right;
+    box-shadow: 0px 0px 10px rgb(122, 121, 121);
+    background: rgba(10, 52, 139, 69%);
+    border-radius: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.btnFinalizarCompra button{
+.btnFinalizarCompra .btnFinCompra{
     padding: 10px 15px;
     font-size: 1em;
     border: none;
@@ -134,7 +161,29 @@
     box-shadow: 0px 0px 10px rgba(37, 36, 36, 0.445);
 }
 
-.btnFinalizarCompra button:hover{
+.btnFinalizarCompra .btnFinCompra:hover{
+    color: white;
+    background: rgba(0, 38, 255, 0.445);
+    box-shadow: 2px 5px 10px rgba(0, 49, 95, 0.445);
+}
+
+.btnFinalizarCompra .backTop{
+    border-radius: 50%;
+    border: none;
+    width: 40px;
+    height: 40px;
+    flex: none;
+    box-shadow: 0px 0px 10px rgba(37, 36, 36, 0.445);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    background: white;
+    text-decoration: none;
+    color: black;
+}
+
+.btnFinalizarCompra .backTop:hover{
     color: white;
     background: rgba(0, 38, 255, 0.445);
     box-shadow: 2px 5px 10px rgba(0, 49, 95, 0.445);
