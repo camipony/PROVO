@@ -11,6 +11,31 @@
 
 }
 
+@media (max-width: 850px){
+    .contProductFact .precioUni{
+        width: 0;
+        display: none;
+    }
+}
+
+@media (max-width: 680px){
+    .contProductFact .cantidad{
+        width: 0;
+        display: none;
+    }
+}
+
+@media (max-width: 580px){
+    .conteTitleFactueacion{
+        justify-content: space-around;
+    }
+
+    .conteTitleFactueacion .backToHome{
+        position: relative;
+        left: 0;
+    }
+}
+
 @media (max-width: 500px){
     .contetFormFact{
         width: 100%;
@@ -19,4 +44,9 @@
     .formDetallFactura .contInput p {
         width: 350px;
     }
+
+    .contProductFact table{
+        width: 500px;
+    }
+    
 }

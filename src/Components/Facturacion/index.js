@@ -10,7 +10,7 @@ export default class index extends Component {
         this.state = {
             isModal: false,
             modoModal: "",
-            datos:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],
+            datos:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30],
             nombreTienda: "",
             codigoTendero: "",
             telefonoTienda: "",
@@ -88,14 +88,14 @@ export default class index extends Component {
                 <img src="https://cdn.discordapp.com/attachments/911076621333692456/913617361842602034/3.png" atl="../" ></img>
             </div>*/}
 
-            <div className="conteTitleFactueacion" id='topFacturacion'>
+            <div className="conteTitleFactueacion">
                 <button className='backToHome'>
                     <ion-icon name="home-outline"></ion-icon>
                 </button>
                 <h1  > Facturacion </h1>
             </div>
 
-            <div className="contetFormFact">
+            <div className="contetFormFact" id='topFacturacion'>
                 <div className='formDetallTienda detallFactTien'>
                     <h1>Detalles  Tienda</h1>
                     <div className='contInput extends'>
@@ -160,9 +160,9 @@ export default class index extends Component {
                         <tr>
                             <th>ID</th>
                             <th className='itemProductFact'>Producto</th>
-                            <th>Precio U.</th>
-                            <th>Cantidad</th>
-                            <th>Subtotal</th>
+                            <th className='precioUni'>Precio U.</th>
+                            <th className='cantidad'>Cantidad</th>
+                            <th className='subTotal'>Subtotal</th>
                             <th className="itemAccionFact">Accion</th>
                         </tr>
                     </thead>
@@ -195,9 +195,9 @@ class ItemListProduc extends Component{
         return <tr key={this.props.dat}>
             <td>{this.props.dat}</td>
             <td className='itemProductFact'>Canela</td>
-            <td>$2000</td>
-            <td>2</td>
-            <td>$4000</td>
+            <td className='precioUni'>$2000</td>
+            <td className='cantidad'>2</td>
+            <td className='subTotal'>$4000</td>
             <td className="itemAccionFact">
                 <button className='btnAdd'>+</button>
                 <button className='btnMin'>-</button>
