@@ -81,11 +81,13 @@ const Login = () => {
 				<div className="efect">
 				<div className="title">¡Bienvenido a provo!</div>
 				<br></br>
+
 					<Box sx={{ ...commonStyles }} >
 						<div className={classes.div}>
 							<span className="cout">
 								<div className="cins"></div>
 							</span>
+							
 							<form className={classes.form}>
 								<TextField
 									fullWidth
