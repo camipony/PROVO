@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
 	},
 
 	container: {
-		opacity: '0.8',
+		opacity: '0.85',
 		marginTop: theme.spacing(8),
 		[theme.breakpoints.down(400 + theme.spacing(2) + 2)]: {
 			marginTop: 0,
