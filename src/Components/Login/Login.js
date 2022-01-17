@@ -125,9 +125,7 @@ const Login = () => {
 					</Box>
 				</div>
 			</Container>
-
 		</Grid>
-
 	)
 }
 
