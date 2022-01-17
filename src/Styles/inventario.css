@@ -1,0 +1,155 @@
+/*@font-face {
+  font-family: "Sonsie One";
+  font-style: normal;
+  font-weight: 400;
+  src: url("https://fonts.gstatic.com/s/sonsieone/v11/PbymFmP_EAnPqbKaoc18UVy21g.ttf")
+    format("truetype");
+}*/
+
+.titulo1 {
+  text-align: center;
+  font: small-caps 100%/200% serif;
+  font-size: 2em;
+}
+
+.directorio {
+  height: 50px;
+  display: flex;
+  margin-bottom: 10px;
+  border: solid 4px black;
+}
+
+.direcciones {
+  padding: 0;
+  list-style-type: none;
+  flex: 2;
+  display: flex;
+}
+
+.l1 {
+  display: inline;
+  text-align: center;
+  flex: 1;
+}
+
+.f1 {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.a1 {
+  display: inline-block;
+  font-size: 1rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: black;
+}
+
+.inputSearch {
+  font-size: 1.1rem;
+  height: 30px;
+  background-color: transparent;
+  border: solid 2px black;
+}
+
+.inputClick {
+  font-size: 2rem;
+  height: 32px;
+  background-color: transparent;
+  border: solid 2px black;
+}
+
+.inputClick[type="search"] {
+  flex: 1;
+}
+
+.inputClick[type="submit"] {
+  /*flex: 1;*/
+  margin-left: 10px;
+  font-size: small;
+}
+
+.inventario {
+  height: 540px;
+  width: 75%;
+  /*flex: 4;*/
+  margin-bottom: 10px;
+  border: solid 4px black;
+  float: left;
+  margin-right: 10px;
+  overflow: auto;
+  columns: 2;
+}
+
+.menu1 {
+  height: 540px;
+  width: 22%;
+  display: flex;
+  margin-bottom: 10px;
+  border: solid 4px black;
+  float: left;
+  justify-content: center;
+}
+
+.lista2 {
+  align-items: center;
+  align-self: center;
+}
+/*.menu1 {
+  flex: 1;
+  margin-right: 10px;
+  background-color: #084ac3;
+}*/
+
+.l2 {
+  padding-bottom: 35px;
+  padding-right: 25px;
+
+  list-style-type: none;
+}
+
+.editar,
+.marcar,
+.eliminar {
+  background-color: transparent;
+  height: 30px;
+  width: 100px;
+  margin: -20px -50px;
+  position: relative;
+  top: 10%;
+  left: 5%;
+}
+/*.editar {
+  margin: 0;
+  padding: 0;
+}
+
+.l2 {
+  display: block;
+  float: left;
+  padding: 0 10px;
+}*/
+
+#galeria {
+  display: block;
+  justify-content: space-between;
+}
+
+.galeria-item {
+  /*padding: 2rem;*/
+  padding-left: 5%;
+  padding-top: 5%;
+  padding-bottom: 0%;
+  /* border: solid 4px black;*/
+}
+
+.galeria-h3,
+.galeria-p {
+  text-align: justify;
+  text-decoration: dashed;
+}
+
+.piePagina {
+  margin-top: 10px;
+}
