@@ -58,7 +58,7 @@ export default class index extends Component {
           </ul>
         </aside>
         <footer className="piePagina">
-          ©Todos los derechos reservados Provo (2021-2021)
+          ©Todos los derechos reservados Provos (2021-2021)
         </footer>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
