@@ -1,0 +1,17 @@
+<aside className="menu1">
+     <ul className="lista2">
+         <li className="l2">
+            <input type="submit" value="Editar" className="editar" />
+            </li>
+            <li className="l2">
+              <input type="submit" value="Marcar" className="marcar" />
+            </li>
+            <li className="l2">
+              <input type="submit" value="Eliminar" className="eliminar" />
+         </li>
+    </ul>
+</aside>
+
+ <footer className="piePagina">
+     ©Todos los derechos reservados Provos (2021-2021)
+</footer>

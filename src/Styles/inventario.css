@@ -70,16 +70,26 @@
   font-size: small;
 }
 
+.insert {
+  font-size: 1.1rem;
+  height: 30px;
+  background-color: transparent;
+  border: solid 2px black;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  padding-bottom: 1%;
+}
+
 .inventario {
-  height: 800px;
-  width: 75%;
+  width: 100%;
   /*flex: 4;*/
   margin-bottom: 10px;
   border: solid 4px black;
   float: left;
   margin-right: 10px;
   overflow: auto;
-  columns: 3;
+  columns: 6;
 }
 
 .menu1 {
@@ -109,29 +119,12 @@
   list-style-type: none;
 }
 
-.editar,
-.marcar,
-.eliminar {
-  background-color: transparent;
-  height: 30px;
-  width: 100px;
-  margin: -20px -50px;
-  position: relative;
-  top: 10%;
-  left: 5%;
-}
-/*.editar {
-  margin: 0;
-  padding: 0;
-}
-
 .l2 {
   display: block;
   float: left;
   padding: 0 10px;
-}*/
-
-#galeria {
+}
+*/ #galeria {
   display: block;
   justify-content: space-between;
 }

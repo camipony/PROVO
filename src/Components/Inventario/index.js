@@ -51,6 +51,8 @@ function renderizarGaleria(imagenes) {
           <img src="${imagen.src}" alt="${imagen.alt}"  width="200px" height="120px" style="border: solid 4px black;" />
           <h3 className = "galeria-h3">${imagen.nombre}</h3>
           <p className = "galeria-p">${imagen.precio}€</p>
+          <input type="submit" value="E" className="edit" />
+          <input type="submit" value="D" className="delete" />
         </div>
  
       `;
@@ -102,25 +104,10 @@ export default class index extends Component {
             <input type="submit" value="Buscar" className="inputClick" />
           </form>
         </nav>
+        <input type="submit" value="INSERTAR" className="insert" />
         <section className="inventario">
           <div id="galeria"></div>
         </section>
-        <aside className="menu1">
-          <ul className="lista2">
-            <li className="l2">
-              <input type="submit" value="Editar" className="editar" />
-            </li>
-            <li className="l2">
-              <input type="submit" value="Marcar" className="marcar" />
-            </li>
-            <li className="l2">
-              <input type="submit" value="Eliminar" className="eliminar" />
-            </li>
-          </ul>
-        </aside>
-        <footer className="piePagina">
-          ©Todos los derechos reservados Provos (2021-2021)
-        </footer>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="funcion.js"></script>
