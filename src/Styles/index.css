@@ -4,12 +4,14 @@
   box-sizing: border-box;
 }
 
+/*
 img {
   display: block;
   top: 90%;
   right: 1%;
   position: absolute;
 }
+*/
 
 body {
   margin: 0;

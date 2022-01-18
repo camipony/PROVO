@@ -71,7 +71,7 @@
 }
 
 .inventario {
-  height: 540px;
+  height: 800px;
   width: 75%;
   /*flex: 4;*/
   margin-bottom: 10px;
@@ -79,11 +79,11 @@
   float: left;
   margin-right: 10px;
   overflow: auto;
-  columns: 2;
+  columns: 3;
 }
 
 .menu1 {
-  height: 540px;
+  height: 800px;
   width: 22%;
   display: flex;
   margin-bottom: 10px;
@@ -138,10 +138,10 @@
 
 .galeria-item {
   /*padding: 2rem;*/
-  padding-left: 5%;
+  /*padding-left: 10%;
   padding-top: 5%;
-  padding-bottom: 0%;
-  /* border: solid 4px black;*/
+  padding-bottom: 0%;*/
+  border: solid 4px black;
 }
 
 .galeria-h3,
