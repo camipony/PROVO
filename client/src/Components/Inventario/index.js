@@ -49,8 +49,8 @@ function renderizarGaleria(imagenes) {
     html += `
         <div className="galeria-item">
           <img src="${imagen.src}" alt="${imagen.alt}"  width="200px" height="120px" style="border: solid 4px black;" />
-          <h3 className = "galeria-h3">${imagen.nombre}</h3>
-          <p className = "galeria-p">${imagen.precio}€</p>
+          <h3 className= "galeria-h3">${imagen.nombre}</h3>
+          <p className= "galeria-p">${imagen.precio}€</p>
           <input type="submit" value="E" className="edit" />
           <input type="submit" value="D" className="delete" />
         </div>
@@ -104,10 +104,14 @@ export default class index extends Component {
             <input type="submit" value="Buscar" className="inputClick" />
           </form>
         </nav>
-        <input type="submit" value="INSERTAR" className="insert" />
+        <div className="insertar">
+          <input type="submit" value="INSERTAR" className="insert" />
+        </div>
+
         <section className="inventario">
           <div id="galeria"></div>
         </section>
+        <footer>Provo Todos los derechos reservados ©</footer>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="funcion.js"></script>
