@@ -15,3 +15,145 @@
  <footer className="piePagina">
      ©Todos los derechos reservados Provos (2021-2021)
 </footer>
+
+----------------------------------------------------------------
+<nav className="directorio">
+          <ul className="direcciones">
+            <li className="l1">
+              <a className="a1" href="#">
+                Inicio
+              </a>
+            </li>
+            <li className="l1">
+              <a className="a1" href="#">
+                Nuestro equipo
+              </a>
+            </li>
+            <li className="l1">
+              <a className="a1" href="#">
+                Proyectos
+              </a>
+            </li>
+            <li className="l1">
+              <a className="a1" href="#">
+                Contacto
+              </a>
+            </li>
+          </ul>
+
+          <form className="f1">
+            <input
+              type="search"
+              name="q"
+              placeholder="Buscar"
+              className="inputSearch"
+            />
+            <input type="submit" value="Buscar" className="inputClick" />
+          </form>
+        </nav>
+--------------------------------------------------------------
+
+        .directorio {
+  height: 50px;
+  display: flex;
+  margin-bottom: 10px;
+  border: solid 4px black;
+}
+
+.direcciones {
+  padding: 0;
+  list-style-type: none;
+  flex: 2;
+  display: flex;
+}
+
+.l1 {
+  display: inline;
+  text-align: center;
+  flex: 1;
+}
+
+.f1 {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.a1 {
+  display: inline-block;
+  font-size: 1rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: black;
+}
+
+.inputSearch {
+  font-size: 1.1rem;
+  height: 30px;
+  background-color: transparent;
+  border: solid 2px black;
+}
+
+.inputClick {
+  font-size: 2rem;
+  height: 32px;
+  background-color: transparent;
+  border: solid 2px black;
+}
+
+.inputClick[type="search"] {
+  flex: 1;
+}
+
+.inputClick[type="submit"] {
+  /*flex: 1;*/
+  margin-left: 10px;
+  font-size: small;
+}
+
+.insertar {
+  padding-bottom: 2.5%;
+}
+
+.insert {
+  font-size: 1.1rem;
+  height: 30px;
+  background-color: transparent;
+  border: solid 2px black;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+----------------------------------------------------
+
+.l2 {
+  padding-bottom: 35px;
+  padding-right: 25px;
+
+  list-style-type: none;
+}
+
+.l2 {
+  display: block;
+  float: left;
+  padding: 0 10px;
+}
+*/ #galeria {
+  display: block;
+  justify-content: space-between;
+}
+
+.galeria-item {
+  /*padding: 2rem;*/
+  /*padding-left: 10%;
+  padding-top: 5%;
+  padding-bottom: 0%;*/
+  /* border: solid 4px black;*/
+}
+
+.galeria-h3,
+.galeria-p {
+  text-align: justify;
+  text-decoration: dashed;
+}
