@@ -49,7 +49,7 @@ export default class index extends Component {
         <div className="insertarD">
           {/* <input type="submit" value="INSERTAR" className="insert" /> */}
           <button className="insert" onClick={this.handleClick}>
-            {this.state.isToggleOn ? "ON" : "OFF"}
+            {this.state.isToggleOn ? "INSERTAR" : "OFF"}
           </button>
         </div>
 
