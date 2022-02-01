@@ -9,7 +9,7 @@ const ListProducto= () => {
 
   const deleteProducto = async id => {
     try {
-      const deleteProduct = await fetch(`http://localhost:5000/todos/${id}`, {
+      const deleteProduct = await fetch(`http://localhost:9000/productos/${id}`, {
         method: "DELETE"
       });
 
@@ -21,7 +21,7 @@ const ListProducto= () => {
 
   const getProducto = async () => {
     try {
-      const response = await fetch("http://localhost:5000/todos");
+      const response = await fetch("http://localhost:9000");
       const jsonData = await response.json();
 
       setProducto(jsonData);

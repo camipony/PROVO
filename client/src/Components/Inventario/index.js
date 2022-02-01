@@ -1,10 +1,14 @@
 import React, { Component } from "react";
 import "../../Styles/inventario.css";
+import "../../Styles/App.css";
 //import "../../Components/Inventario/funcion.js";
 import casa from "../../images/casa.png";
 import provo2 from "../../images/provo2.png";
 // import { AiOutlineHome } from 'react-icons/ai';
 import "../../Styles/mediaProductos.css";
+
+import InputProducto from "../../Components/Inventario/InputProducto.js";
+import ListProducto from "../../Components/Inventario/ListProducto.js";
 
 export default class index extends Component {
   constructor(props) {
@@ -48,13 +52,15 @@ export default class index extends Component {
 
         <div className="insertarD">
           {/* <input type="submit" value="INSERTAR" className="insert" /> */}
-          <button className="insert" onClick={this.handleClick}>
+          {/* <button className="insert" onClick={this.handleClick}>
             {this.state.isToggleOn ? "INSERTAR" : "OFF"}
-          </button>
+          </button> */}
         </div>
 
         <section className="inventario">
-          <div id="galeria"></div>
+        <InputProducto />
+        <ListProducto />
+          {/* <div id="galeria"></div> */}
         </section>
         <div className="fin">
           <footer className="piePagina">

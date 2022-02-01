@@ -16,8 +16,8 @@ app.post("/productos", async (req, res) => {
     const { nombre } = req.body;
     const { cantidad } = req.body;
     const newProductos = await pool.query(
-      "INSERT INTO productos (nombre,cantidad) VALUES($1,$2) RETURNING *",
-      [description,cantidad ]
+      "INSERT INTO productos (nombre) VALUES($1) RETURNING *",
+      [description ]
     );
 
     res.json(newProductos.rows[0]);
@@ -83,6 +83,6 @@ app.delete("/productos/:id", async (req, res) => {
   }
 });
 
-app.listen(5000, () => {
-  console.log("server has started on port 5000");
+app.listen(9000, () => {
+  console.log("server has started on port 9000");
 });
