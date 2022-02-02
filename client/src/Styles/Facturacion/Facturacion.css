@@ -1,0 +1,90 @@
+.bodyHomeFacturaa{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: row;
+}
+
+.bodyHF{
+    width: 100%;
+    height: 100%;
+}
+
+.headerHF{
+    width: 100%;
+    height: 80px;
+    padding-right: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.headerHF .contTitle{
+    width: calc(100% - 50px);
+    padding: 15px 15px;
+    padding-left: 50px;
+}
+
+.headerHF .contTitle h1{
+    display: inline;
+    padding: 10px 15px;
+    font-weight: 900;
+    box-shadow: -6px 8px 10px rgba(255, 255, 255, 0.5);
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+.headerHF .icon{
+    flex: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    box-shadow: 0px 0px 10px rgba(255, 249, 249, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.headerHF .icon img{
+    height: 100%;
+}
+
+.cuerpoHF {
+    position: relative;
+    width: 100%;
+    height: calc(100% - 90px);
+    overflow: hidden;
+    overflow-y: auto;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.cuerpoHF .BtnFacturaActiva{
+    position: absolute;
+    bottom: 10px;
+    width: 95%;
+    text-align: end;
+    box-shadow: 0px 0px 10px rgba(252, 252, 252, 0.5);
+    border-radius: 30px;
+    padding: 10px;
+}
+
+.cuerpoHF .BtnFacturaActiva button{
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+}
+
+.cuerpoHF .BtnFacturaActiva button ion-icon{
+    position: relative;
+    font-size: 26px;
+}
+

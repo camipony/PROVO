@@ -1,0 +1,24 @@
+.bodyVerFacturas{
+    width: 100%;
+    height: calc(100% - 62px);
+    padding: 10px;
+    overflow: hidden;
+    overflow-y: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.bodyVerFacturas::-webkit-scrollbar{
+    width: 10px;
+}
+
+.bodyVerFacturas::-webkit-scrollbar-thumb{
+    background: linear-gradient(#00c6ff, #00ffea);
+    border-radius: 6px;
+}
+
+.bodyVerFacturas::-webkit-scrollbar-thumb:hover{
+    background: linear-gradient(#00c6ff, #00c6ff);
+}

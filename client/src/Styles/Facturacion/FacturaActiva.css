@@ -1,0 +1,236 @@
+.modalFact{
+    width: 95%;
+    height: 550px;
+    background: white;
+    border-radius: 10px;
+}
+
+.modalFact .contTop{
+    width: 100%;
+    height: 40px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 10px;
+}
+
+.modalFact .contTop button{
+    width: 30px;
+    height: 30px;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modalFact .contTop button ion-icon{
+    font-size: 20px;
+}
+
+.modalFact .contFooter{
+    width: 100%;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.modalFact .contFooter button{
+    padding: 5px 15px;
+    border-radius: 20px;
+    border: none;
+    font-size: 18px;
+    font-weight: 800;
+    background: rgb(119, 201, 255);
+}
+
+.modalFact .contBody{
+    width: 100%;
+    height: calc(100% - 85px);
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.modalFact .contBody .zonaData{
+    width: 400px;
+    height: 100%;
+    border-right: 1px solid black;
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+.modalFact .contBody .zonaData .contDataStore,
+.modalFact .contBody .zonaData .contDataFactura{
+    flex: none;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 0px 5px;
+    padding-left: 20px;
+    padding-top: 10px;
+}
+
+.modalFact .contBody .zonaData .contDataStore p,
+.modalFact .contBody .zonaData .contDataFactura p{
+    flex: none;
+    background: rgba(255, 255, 255, 0.2);
+    outline: none;
+    padding: 10px 20px;
+    border-radius: 35px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    font-size: 18px;
+    letter-spacing: 1px;
+    color: rgb(22, 21, 21);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    margin: 5px 8px;
+    background: white;
+}
+
+.modalFact .contBody .zonaData .contDataStore input{
+    width: 250px;
+    background: rgba(255, 255, 255, 0.2);
+    outline: none;
+    padding: 10px 20px;
+    border-radius: 35px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    font-size: 18px;
+    letter-spacing: 1px;
+    color: rgb(22, 21, 21);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    margin: 5px 8px;
+    background: white;
+}
+
+.modalFact .contBody .zonaList{
+    width: calc(100% - 300px);
+    height: 100%;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    overflow: hidden;
+    overflow-x: auto;
+}
+
+.modalFact .contBody .zonaList .headList{
+    position: relative;
+    width: 100%;
+}
+
+.modalFact .contBody .zonaList .headList .trData,
+.modalFact .contBody .zonaList .bodyList .trData{
+    width: 100%;
+    height: 40px;
+    overflow: hidden;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.modalFact .contBody .zonaList .headList p{
+    font-size: 20px;
+    font-weight: 800;
+    margin: 0 1px;
+    border-bottom: 1px solid grey;
+}
+
+.modalFact .contBody .zonaList .bodyList p{
+    margin: 0 1px;
+    border-bottom: 1px solid gray;
+}
+
+.modalFact .contBody .zonaList .bodyList{
+    width: 100%;
+    height: calc(100% - 40px);
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+.modalFact .contBody .zonaList .bodyList::-webkit-scrollbar{
+    width: 8px;
+}
+
+.modalFact .contBody .zonaList .bodyList::-webkit-scrollbar-thumb{
+    background: linear-gradient(#007a9c, #00ffea);
+    border-radius: 6px;
+}
+
+.modalFact .contBody .zonaList .bodyList::-webkit-scrollbar-thumb:hover{
+    background: linear-gradient(#007a9c, #00c6ff);
+}
+
+.modalFact .contBody .zonaList .idProducto{
+    flex: none;
+    width: 100px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modalFact .contBody .zonaList .nameProducto{
+    flex: none;
+    width: 210px;
+    height: 100%;
+    padding-left: 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.modalFact .contBody .zonaList .cantidadProducto{
+    flex: none;
+    width: 110px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modalFact .contBody .zonaList .precioProducto{
+    flex: none;
+    width: 150px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modalFact .contBody .zonaList .precioTotal{
+    flex: none;
+    width: 160px;
+    height: 100%;
+    padding-right: 10px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.modalFact .contBody .zonaList .accionesProducto{
+    flex: none;
+    width: 140px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid gray;
+}
+
+.modalFact .contBody .zonaList .accionesProducto button{
+    flex: none;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 50%;
+    margin: 0 3px;
+}

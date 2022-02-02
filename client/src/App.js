@@ -1,5 +1,6 @@
 import './Styles/App.css';
-import Facturacion from './Components/Facturacion'
+//import { MargenSales } from './Components/MargenSales';
+import { Facturacion } from './Components/Facturacion';
 
 function App() {
   return <div className="App">
