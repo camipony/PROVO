@@ -1,0 +1,2 @@
+export const ACTIVE_TOGGLE = 'ACTIVE_TOGGLE';
+export const AGREGAR_FACTURA = 'AGREGAR_FACTURA';

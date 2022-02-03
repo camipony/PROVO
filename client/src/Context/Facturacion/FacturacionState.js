@@ -6,6 +6,8 @@ import FacturacionReducer from './FacturacionReducer'
 const FacturarionState = (props) => {
     const inicialState = {
         facturas: [],
+        productoFactura: [],
+        facturaActiva: false,
         error: false,
         loading: false
     }
@@ -16,7 +18,7 @@ const FacturarionState = (props) => {
         try {
             dispatch({
                 type: 'OBTENER_FACTURAS',
-                payload: []
+                payload: idUsuario
             })
         } catch (error) {
             console.log(error);
@@ -37,7 +39,7 @@ const FacturarionState = (props) => {
         try {
             dispatch({
                 type: 'OBTENER_FACTURA',
-                payload: []
+                payload: id
             })
         } catch (error) {
             console.log(error);
@@ -65,12 +67,64 @@ const FacturarionState = (props) => {
         }
     }
 
+    const addProductoFactura = () => {
+        try{
+            dispatch({
+                type: '',
+                payload: []
+            })
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const deleteProductoFactura = () => {
+        try{
+            dispatch({
+                type: '',
+                payload: []
+            })
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const updateProductoFactura = (newProduct) => {
+        try{
+            dispatch({
+                type: '',
+                payload: newProduct
+            })
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const vaciarProductoFactura = () => {
+        try{
+            dispatch({
+                type: '',
+                payload: []
+            })
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return (
         <FacturacionContext.Provider value={{
             facturas: state.facturas,
+            productoFactura: state.productoFactura,
+            facturaActiva: state.facturaActiva,
             error: state.error,
             loading: state.loading,
-            obtenerFacturas
+            obtenerFacturas,
+            obtenerFactura,
+            addProductoFactura,
+            deleteProductoFactura,
+            updateProductoFactura,
+            guardarFactura,
+            vaciarProductoFactura
         }} >
             {props.children}
         </FacturacionContext.Provider>

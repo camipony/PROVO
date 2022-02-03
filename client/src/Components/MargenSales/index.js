@@ -1,4 +1,7 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
+
+/* Context */
+import ToggleContext from '../../Context/Toggle/ToggleContext'
 
 /* Styles */
 import '../../Styles/MargeSales/margeSales.css'
@@ -8,20 +11,18 @@ import '../../Styles/MargeSales/mediaMargeSales.css'
 import Toggle from './Toggle';
 
 export const MargenSales = () => {
-  let [activar, setActivar] = useState(false);
 
-  const ActivarToggle = () => {
-    setActivar( activar = !activar );
-  }
+  const toggleContext = useContext(ToggleContext);
+  const {activeToggle, maxMinMenu} = toggleContext;
 
   return <div className='bodyMargeSales'>
 
     <Toggle 
-      activar = {activar} 
-      ActivarToggle = {ActivarToggle}
+      activar = {activeToggle} 
+      ActivarToggle = {maxMinMenu}
     />
 
-    <div className={activar ? 'BodyMS active':'BodyMS'}>
+    <div className={activeToggle ? 'BodyMS active':'BodyMS'}>
       <div className='headerMS'>
         <div className='contTitle'>
           <h1>SALES MARGIN</h1>

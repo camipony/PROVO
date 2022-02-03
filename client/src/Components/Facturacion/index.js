@@ -1,21 +1,20 @@
 /* eslint-disable jsx-a11y/alt-text */
-import React, { Component, useState } from 'react'
+import React, { Component, useState, useContext } from 'react'
 //import '../../Styles/Facturacion/facturacionStyle.css'
-//import '../../Styles/Facturacion/mediaFacturacion.css'
 import '../../Styles/Facturacion/Facturacion.css'
+//import '../../Styles/Facturacion/mediaFacturacion.css'
 import Toggle from '../MargenSales/Toggle';
 import CrearFacturas from './CrearFacturas';
 import VerFacturas from './VerFacturas';
 
+/* Context */
+import ToggleContext from '../../Context/Toggle/ToggleContext'
 
 export const Facturacion = () => {
 
-    let [activar, setActivar] = useState(false);
-    let [creadoFactura, setCreadoFactura] = useState(true);
-
-    const ActivarToggle = () => {
-        setActivar( activar = !activar );
-    }
+    const toggleContext = useContext(ToggleContext);
+    const {activeToggle, maxMinMenu} = toggleContext;
+    let [creadoFactura, setCreadoFactura] = useState(false);
 
     const activeGenereFactura = () => {
         setCreadoFactura(creadoFactura = !creadoFactura);
@@ -34,8 +33,8 @@ export const Facturacion = () => {
     return (
         <div className='bodyHomeFacturaa'>
             <Toggle 
-                activar = {activar} 
-                ActivarToggle = {ActivarToggle}
+                activar = {activeToggle} 
+                ActivarToggle = {maxMinMenu}
             />
             <div className='bodyHF'>
                 <div className='headerHF'>

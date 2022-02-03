@@ -55,7 +55,17 @@
     /*padding: 8px 15px;*/
 }
 
-.bodyToggle ul li:hover{
+.bodyToggle ul li .enlace{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.bodyToggle ul li:hover .enlace{
     background: rgb(165, 165, 252);
     color: white;
     border-radius: 15px;
@@ -69,12 +79,16 @@
     height: 50px;
 }
 
-.bodyToggle ul li.active:hover{
+.bodyToggle ul li.active .enlace{
+    justify-content: center;
+}
+
+.bodyToggle ul li.active:hover .enlace{
     border-radius: 15px;
     padding-left: 0px;
 }
 
-.bodyToggle ul li.active .icon:hover{
+.bodyToggle ul li.active .icon:hover .enlace{
     position: absolute;
     /*left: 15px;*/
 }

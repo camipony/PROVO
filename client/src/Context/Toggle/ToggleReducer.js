@@ -1,5 +1,5 @@
 import {
-    AGREGAR_FACTURA
+    ACTIVE_TOGGLE
 } from '../type'
 
 // eslint-disable-next-line import/no-anonymous-default-export
@@ -7,7 +7,7 @@ export default (state, action) => {
     const {payload, type} = action;
 
     switch(type){
-        case AGREGAR_FACTURA:
+        case ACTIVE_TOGGLE:
             return {
                 ...state,
                 activeToggle: payload
