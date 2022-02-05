@@ -40,7 +40,8 @@ export const MargenSales = () => {
             <canvas id="daySales" width="400" height="400"></canvas>
           </div>
         </div>
-        <div className='TotalVentas'></div>
+        <div className='TotalVentas'>
+        </div>
         <div className='infoInventario'></div>
         <div className='Contfacturas'></div>
         <div className='infoStore'></div>

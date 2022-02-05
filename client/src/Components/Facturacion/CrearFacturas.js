@@ -10,6 +10,9 @@ export default function CrearFacturas(props) {
   let [state, setState] = useState({
     codigoTendero: ""
   });
+  
+  let [ampliarDF, setAmpliarDF] = useState(false);
+  let [ampliarDT, setAmpliarDT] = useState(false);
 
   const obtenerFecha = () => {
     var hoy =  new Date()
@@ -37,8 +40,14 @@ export default function CrearFacturas(props) {
       </div>
       <div className='contBody'>
         <div className='zonaData'>
-          <div className='contDataStore'>
-            <h1>Detalles  Tienda</h1>
+          <div className={ ampliarDT ? "contDataStore active" : "contDataStore" }>
+            <div className='headDataDetail'>
+              <button onClick={() => setAmpliarDT( ampliarDT = !ampliarDT )}>
+                { ampliarDT ? <ion-icon name="caret-down-outline"></ion-icon> 
+                                  : <ion-icon name="caret-up-outline"></ion-icon> }
+              </button>
+              <h1>Detalles  Tienda</h1>
+            </div>            
             <p className='nameStore'>Nombre: PROVO STORE </p>
             <p className='phoneStore'>Tel: 3556428 </p>
             <input 
@@ -49,8 +58,14 @@ export default function CrearFacturas(props) {
               value={state.codigoTendero} />
             
           </div>
-          <div className='contDataFactura'>
-            <h1>Detalles  Factura</h1>
+          <div className={ ampliarDF ? "contDataFactura active" : "contDataFactura" }>
+            <div className='headDataDetail'>
+              <button onClick={() => setAmpliarDF( ampliarDF = !ampliarDF )}>
+                { ampliarDF ? <ion-icon name="caret-down-outline"></ion-icon> 
+                                  : <ion-icon name="caret-up-outline"></ion-icon> }
+              </button>
+              <h1>Detalles  Factura</h1>
+            </div>
             <p className='dateFact'>{ "Fecha: " + obtenerFecha() }</p>
             <p className='totalProductFact'> Total Productos: 500 </p>
             <p className='totalPagarFact'> Total a Pagar: 2000015 </p>

@@ -99,7 +99,7 @@
 .ModalContainer .modalVent {
     flex: none;
     width: 500px;
-    height: 600px;
+    height: 95%;
     border-radius: 10px;
     background: white;
 }
