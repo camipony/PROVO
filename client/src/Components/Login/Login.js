@@ -37,7 +37,6 @@ const useStyles = makeStyles(theme => ({
 		color: 'white',
 		//top: '10%',
 		marginTop: theme.spacing(9),
-		
 	},
 	button: {
 		bgColor: 'white',
@@ -49,6 +48,14 @@ const useStyles = makeStyles(theme => ({
 const toHome = () => {
 	<Home/>
 }
+
+export class Card {
+	constructor(username, password) {
+	  this.username = username;
+	  this.password = username;
+	  console.log("user: " +  username + " pass: "+ password);
+	}
+  }
 
 const Login = () => {
 
@@ -63,7 +70,6 @@ const Login = () => {
 
 	const handleSubmit = async (e) =>{
         e.preventDefault();
-		var yes = false;
         console.log(body);
 		try{
             const res = await axios.get('http://localhost:2000/login/'+ body.username+'/'+body.password); 
@@ -87,12 +93,11 @@ const Login = () => {
         }catch(e){
             console.log(e)
         }
-		console.log(yes);
-		if(yes == false){
-			
-			toHome();
-		}
+
+		Card(body.username, body.password);
     };
+
+
 
 
 	const commonStyles = {

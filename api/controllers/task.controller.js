@@ -1,43 +1,30 @@
 const pool = require('../db');
 
 const getAllTask = async (req, res,next) =>{
-
-
        try {
         const email = req.params.email
         const pass = req.params.pass
         console.log([email, pass])
         const result = await pool.query("SELECT * FROM users WHERE email = $1 AND password= $2", [email, pass]);
-        res.json(result.rows)
-        /*if (result.rows.length > 0) {
-          res.status(200).send({
-            "id": result[0].id,
-            "email": result[0].email,
-            "password": result[0].password
-          });
-          res.json({
-            message : 'Se creado el rol con exito',
-            body : {
-                dato : {
-                    type_rol
-                }
-            }
-          })
-          console.log("Usuario verificado");
-        }
-       
-        else {
-          res.status(400).send('Usuario no existe')
-        }*/
-
-
+        res.json(result.rows);
        } catch (error) {
-
          next(error)
-       }
-  
-      
+       } 
 }
+
+const getHome = async (req, res,next) =>{
+  try {
+   const email = req.params.email
+   const pass = req.params.pass
+   console.log("getHome:  "+ [email, pass])
+   const result = await pool.query("SELECT * FROM users WHERE email = $1 AND password= $2", [email, pass]);
+   res.json(result.rows);
+  } catch (error) {
+    next(error)
+  } 
+}
+
+
       
 const getUser = (req, res) =>{
     const {username, email, password} = req.body
@@ -55,5 +42,6 @@ const register = (req, res) =>{
 module.exports = {
     getAllTask,
     getUser,
-    register
+    register,
+    getHome
 }

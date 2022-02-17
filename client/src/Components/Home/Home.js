@@ -1,6 +1,7 @@
 
 import { styled, useTheme } from '@mui/material/styles';
 import React, { useState } from 'react';
+import {Card} from '../../Components/Login/Login.js'
 import ListItemButton from '@mui/material/ListItemButton';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
@@ -26,7 +27,8 @@ import inventory from '../../assets/inventory.png';
 import products from '../../assets/products.png';
 import sales from '../../assets/sales.png';
 import support from '../../assets/support.png';
-
+import axios from 'axios';
+import Swal from 'sweetalert2';
 import '../../Styles/home.css';
 
 window.document.title = 'Home -> Dashboard';
@@ -40,7 +42,8 @@ const useStyles = makeStyles(theme => ({
 		height: '100vh',
 	},
 	typography: {
-		color: "#414141",
+		color: "#606060",
+		fontFamily: 'Open Sans Condensed',
 
 	  }
 	  
@@ -152,8 +155,6 @@ const Image = styled('span')(({ theme }) => ({
 	color: theme.palette.common.white,
 }));
 
-
-
 const ImageBackdrop = styled('span')(({ theme }) => ({
 	position: 'absolute',
 	left: 0,
@@ -175,12 +176,21 @@ const ImageMarked = styled('span')(({ theme }) => ({
 }));
 
 
-export default function Login() {
+export default function Home() {
 	const theme = useTheme();
 	const [open, setOpen] = React.useState(false);
-	const [body, setBody] = useState({ nickname: '', password: '' })
+	//const [body, setBody] = useState({ username: Login.username, password: Login.password })
+	//console.log("handleChange "+ Login.username);
 	const classes = useStyles()
 
+
+	
+	const handleSubmit = async (e) =>{
+		//setBody({...body,[e.target.name]: e.target.value});
+		//console.log("handleChange"+ body);
+		buttons('Perfil');
+        
+    };
 
 	/** For the Buttons */
 	const images = [
@@ -208,14 +218,21 @@ export default function Login() {
 	];
 
 	const onSubmit = () => {
-		console.log(body)
+		//xconsole.log(body)
 
+	}
+
+	const buttons = (type) =>{
+		
+		if(type == 'Perfil'){
+			console.log(Card.username);
+		}
 	}
 
 	const toFunction = (title) => {
 		console.log(title);
 		if(title == 'Inventario'){
-			window.location = "/login";
+			window.location = "/inventario";
 		}else if(title == 'Productos'){
 			window.location = "/productos";
 		}else if(title == 'Contabilidad'){
@@ -264,12 +281,9 @@ export default function Login() {
 				</DrawerHeader>
 				<Divider />
 				<List>
-					<ListItemButton>
-					<ListItemIcon>
-					<AccountCircleIcon />
-					</ListItemIcon>
-					<ListItemText primary="Perfil" />
-				</ListItemButton>
+					<ListItemButton onClick={(e) => handleSubmit(e)}>
+						<ListItemIcon><AccountCircleIcon /></ListItemIcon>
+						<ListItemText primary="Perfil" /></ListItemButton>
 				<ListItemButton>
 					<ListItemIcon>
 					<ViewListIcon />
