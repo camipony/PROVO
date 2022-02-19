@@ -9,7 +9,7 @@ const ListProducto= () => {
 
   const deleteProducto = async id => {
     try {
-      const deleteProduct = await fetch(`http://localhost:9000/productos/${id}`, {
+      const deleteProducto = await fetch(`http://localhost:9000/testAPI/${id}`, {
         method: "DELETE"
       });
 
@@ -21,12 +21,12 @@ const ListProducto= () => {
 
   const getProducto = async () => {
     try {
-      const response = await fetch("http://localhost:9000");
+      const response = await fetch("http://localhost:9000/testAPI");
       const jsonData = await response.json();
 
       setProducto(jsonData);
     } catch (err) {
-      console.error(err.message);
+     // console.error(err.message);
     }
   };
 
@@ -39,7 +39,7 @@ const ListProducto= () => {
   return (
     <Fragment>
       {" "}
-      <table class="table mt-5 text-center">
+      <table className="table mt-5 text-center">
         <thead>
           <tr>
             <th>Nombre</th>

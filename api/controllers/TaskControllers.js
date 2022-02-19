@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const pool = require("./db");
+const pool = require("../db");
 
 //middleware
 app.use(cors());
@@ -9,9 +9,9 @@ app.use(express.json()); //req.body
 
 //ROUTES//
 
-//create a todo
+//create a productos
 
-app.post("/productos", async (req, res) => {
+app.post("/productoss", async (req, res) => {
   try {
     const { nombre } = req.body;
     const { cantidad } = req.body;
@@ -28,7 +28,7 @@ app.post("/productos", async (req, res) => {
 
 //get all todos
 
-app.get("/productos", async (req, res) => {
+app.get("/productoss", async (req, res) => {
   try {
     const allProducto = await pool.query("SELECT * FROM productos");
     res.json(allProducto.rows);
@@ -37,9 +37,32 @@ app.get("/productos", async (req, res) => {
   }
 });
 
+
+
+
+  const getUser = async (req, res,next) =>{
+
+    try {
+     
+    const result = await pool.query("SELECT * FROM productos");
+    res.json(result.rows)
+     
+
+    } catch (error) {
+
+      next(error)
+    }
+
+   
+}
+  
+  module.exports = {
+    getUser
+};
+
 //get a todo
 
-app.get("/productos/:id", async (req, res) => {
+app.get("/productoss/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const productos = await pool.query("SELECT * FROM productos WHERE producto_id = $1", [
@@ -54,7 +77,7 @@ app.get("/productos/:id", async (req, res) => {
 
 //update a todo
 
-app.put("/productos/:id", async (req, res) => {
+app.put("/productoss/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const { nombre } = req.body;
@@ -71,7 +94,7 @@ app.put("/productos/:id", async (req, res) => {
 
 //delete a todo
 
-app.delete("/productos/:id", async (req, res) => {
+app.delete("/productoss/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const deleteProducto = await pool.query("DELETE FROM productos WHERE producto_id = $1", [
@@ -83,6 +106,7 @@ app.delete("/productos/:id", async (req, res) => {
   }
 });
 
-app.listen(9000, () => {
-  console.log("server has started on port 9000");
+app.listen(5000, () => {
+  console.log("server was started on port 5000");
 });
+

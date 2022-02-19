@@ -69,8 +69,8 @@ export default class index extends Component {
           <img src={provo2} alt="Logo Provo" className="provo" />
         </div>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="funcion.js"></script>
+        {/* <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="funcion.js"></script> */}
         <p className="App-intro">;{this.state.apiResponse}</p>
       </>
     );

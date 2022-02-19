@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from "react";
 
-const EditProducto = ({ producto }) => {
-  const [nombre, setNombre] = useState(producto.nombre);
+const EditProducto = ({ product }) => {
+  const [nombre, setNombre] = useState(product.nombre);
 
   //edit description function
 
@@ -10,7 +10,7 @@ const EditProducto = ({ producto }) => {
     try {
       const body = { nombre };
       const response = await fetch(
-        `http://localhost:5000/todos/${producto.producto_id}`,
+        `http://localhost:9000/testAPI/${product.producto_id}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -30,7 +30,7 @@ const EditProducto = ({ producto }) => {
         type="button"
         class="btn btn-warning"
         data-toggle="modal"
-        data-target={`#id${producto.producto_id}`}
+        data-target={`#id${product.producto_id}`}
       >
         Edit
       </button>
@@ -40,8 +40,8 @@ const EditProducto = ({ producto }) => {
       */}
       <div
         class="modal"
-        id={`id${producto.producto_id}`}
-        onClick={() => setNombre(producto.nombre)}
+        id={`id${product.producto_id}`}
+        onClick={() => setNombre(product.nombre)}
       >
         <div class="modal-dialog">
           <div class="modal-content">
@@ -51,7 +51,7 @@ const EditProducto = ({ producto }) => {
                 type="button"
                 class="close"
                 data-dismiss="modal"
-                onClick={() => setNombre(producto.nombre)}
+                onClick={() => setNombre(product.nombre)}
               >
                 &times;
               </button>
@@ -79,7 +79,7 @@ const EditProducto = ({ producto }) => {
                 type="button"
                 class="btn btn-danger"
                 data-dismiss="modal"
-                onClick={() => setNombre(producto.nombre)}
+                onClick={() => setNombre(product.nombre)}
               >
                 Close
               </button>

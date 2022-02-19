@@ -71,6 +71,14 @@
   background-color: #084ac3;
 }*/
 
+.inputprod{
+  align-items: center;
+  text-align: center;
+  align-content: center;
+  align-self: center;
+  align-tracks: center;
+}
+
 .fin{
   width: 100%;
   columns: 2;
@@ -79,7 +87,7 @@
 
 .piePagina {
   margin-top: 3%;
-  margin-left: 10%;
+  margin-right: 35%;
 }
 
 .provo{
