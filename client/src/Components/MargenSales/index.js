@@ -1,29 +1,43 @@
-import React, { useContext } from 'react';
-
-/* Context */
-import ToggleContext from '../../Context/Toggle/ToggleContext'
+import React, { useContext  } from 'react';
+import Swal from 'sweetalert2';
 
 /* Styles */
 import '../../Styles/MargeSales/margeSales.css'
 import '../../Styles/MargeSales/mediaMargeSales.css'
 
-/* Components */
-import Toggle from './Toggle';
+/* Context */
+import UserContext from '../../Context/User/UserContext';
+
 
 export const MargenSales = () => {
 
-  const toggleContext = useContext(ToggleContext);
-  const {activeToggle, maxMinMenu} = toggleContext;
+  const userContext = useContext(UserContext);
+  const {usuarioAutenticado} = userContext;
+
+  if( !usuarioAutenticado ){
+    Swal.fire({
+      icon: 'error',
+      title: ' Debes iniciar secion ',
+      showConfirmButton: false,
+      timer: 3000,
+    }).then(function() {
+      window.location = "/login";
+    });
+    return <>
+    </>
+  }
 
   return <div className='bodyMargeSales'>
 
-    <Toggle 
-      activar = {activeToggle} 
-      ActivarToggle = {maxMinMenu}
-    />
-
-    <div className={activeToggle ? 'BodyMS active':'BodyMS'}>
+    <div className='BodyMS'>
       <div className='headerMS'>
+        <div className='contButtonHead' >
+          <button onClick={ () => {
+            window.location = "/dashboard";
+          }}>
+            <ion-icon name="home-outline"></ion-icon>
+          </button> 
+        </div>
         <div className='contTitle'>
           <h1>SALES MARGIN</h1>
         </div>

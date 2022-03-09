@@ -3,13 +3,51 @@ import React, { useState } from 'react';
 import '../../Styles/Facturacion/FacturaActiva.css'
 import '../../Styles/Facturacion/mediaFacturacion.css'
 
-const list = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]
+let listProduct = [
+  {
+    id: 1,
+    nombre: 'Platano',
+    fecha: '',
+    cantidad: 1,
+    precio: 500,
+  },
+  {
+    id: 2,
+    nombre: 'Arroz',
+    fecha: '',
+    cantidad: 1,
+    precio: 1600,
+  },
+  {
+    id: 3,
+    nombre: 'Papita Margarita',
+    fecha: '',
+    cantidad: 1,
+    precio: 2500,
+  },
+  {
+    id: 4,
+    nombre: 'Libra de Sal',
+    fecha: '',
+    cantidad: 1,
+    precio: 2000,
+  },
+  {
+    id: 5,
+    nombre: 'Lapicero',
+    fecha: '',
+    cantidad: 1,
+    precio: 1000,
+  }  
+]
 
 export default function CrearFacturas(props) {
 
   let [state, setState] = useState({
     codigoTendero: ""
   });
+
+  let [list, setList] = useState(listProduct);
   
   let [ampliarDF, setAmpliarDF] = useState(false);
   let [ampliarDT, setAmpliarDT] = useState(false);
@@ -29,6 +67,64 @@ export default function CrearFacturas(props) {
     setState({
       [e.target.name] : e.target.value
     })
+  }
+
+
+  const actualizarLista = ( accion, id ) => {
+    if( accion === 'inc' ){
+      let listT = list.map( dato => {
+        if( dato.id === id ){
+          return {
+              id: dato.id,
+              nombre: dato.nombre,
+              fecha: dato.fecha,
+              cantidad: dato.cantidad + 1,
+              precio: dato.precio,
+            } 
+        }
+        return dato
+      } )
+
+      setList(listT)
+    }
+    else if( accion === 'dec' ){
+      let listT = list.map( dato => {
+        if( dato.id === id ){
+          return {
+            id: dato.id,
+            nombre: dato.nombre,
+            fecha: dato.fecha,
+            cantidad: dato.cantidad - 1,
+            precio: dato.precio,
+          } 
+        }
+        return dato
+      } )
+
+      setList(listT)
+    }
+    else if( accion === 'del' ){
+      let listT = list.filter( dato => dato.id !== id )
+
+      setList(listT)
+    }
+
+    console.log( 'Accion realizada' )
+  }
+
+  const obtenerTotal = () => {
+    let totalDato = list.map( dato => {
+      return dato.cantidad * dato.precio
+    } )
+
+    let total = 0
+
+    for( let i = 0; i < totalDato.length; i++ ){
+      total = totalDato[i]
+    }
+
+    return total
+
   }
 
   return <div className='ModalContainer'>
@@ -68,7 +164,7 @@ export default function CrearFacturas(props) {
             </div>
             <p className='dateFact'>{ "Fecha: " + obtenerFecha() }</p>
             <p className='totalProductFact'> Total Productos: 500 </p>
-            <p className='totalPagarFact'> Total a Pagar: 2000015 </p>
+            <p className='totalPagarFact'> Total a Pagar:{obtenerTotal()}</p>
           </div>
         </div>
         <div className='zonaList'>
@@ -84,21 +180,27 @@ export default function CrearFacturas(props) {
                         
             </div>
             <div className='bodyList'>
-              {list.map(() => {
-                return <div className='trData' key={list}>
-                    <p className='idProducto'>ID</p>
-                    <p className='nameProducto'>Producto</p>
-                    <p className='cantidadProducto'>Cantidad</p>
-                    <p className='precioProducto'>Precio</p>
-                    <p className='precioTotal'>Total</p>
+              {list.map( dato => {
+                return <div className='trData' key={dato.id}>
+                    <p className='idProducto'>{dato.id}</p>
+                    <p className='nameProducto'>{dato.nombre}</p>
+                    <p className='cantidadProducto'>{dato.cantidad}</p>
+                    <p className='precioProducto'>{dato.precio}</p>
+                    <p className='precioTotal'>{dato.cantidad*dato.precio}</p>
                     <div className='accionesProducto'>
-                      <button className='incBtn'>
+                      <button className='incBtn' onClick={() => {
+                        actualizarLista('inc', dato.id)
+                      }}>
                         +
                       </button>
-                      <button className='decBtn'>
+                      <button className='decBtn' onClick={() => {
+                        actualizarLista('dec', dato.id)
+                      }}>
                         -
                       </button>
-                      <button className='delBtn'>
+                      <button className='delBtn' onClick={() => {
+                        actualizarLista('del', dato.id)
+                      }}>
                         <ion-icon name="trash-outline"></ion-icon>
                       </button>
                     </div>

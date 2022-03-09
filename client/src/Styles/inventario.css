@@ -1,0 +1,90 @@
+/*@font-face {
+  font-family: "Sonsie One";
+  font-style: normal;
+  font-weight: 400;
+  src: url("https://fonts.gstatic.com/s/sonsieone/v11/PbymFmP_EAnPqbKaoc18UVy21g.ttf")
+    format("truetype");
+}*/
+
+
+
+.homeBase{
+  text-align: end;
+  width: 100%;
+}
+
+.home{
+  width:60px;
+  height:60px;
+  background-color: transparent;
+  padding-top: 3%;
+  padding-right: 9%;
+  border-style: none;
+}
+
+.homeIcon{
+  width:60px;
+  height:60px;
+  align-self: center;
+  padding-top: 3%;
+  padding-right: 9%;
+}
+
+.titulo1 {
+  text-align: center;
+  font: small-caps 100%/200% serif;
+  font-size: 2.5em;
+  color: rgb(0, 0, 0);
+  padding-top: 4%;
+  
+}
+
+.insertarD{
+  text-align: center;
+  width: 100%;
+}
+
+.insert{
+  font: small-caps 100%/200% serif;
+  font-size: 2em;
+  text-align: center;
+  background-color: transparent;
+  border-style: none;
+  padding-top: 0.5%;
+  size:100px;
+}
+
+.inventario {
+  width: 90%;
+  height: 800px;
+  /*flex: 4;*/
+  margin-bottom: 10px;
+  margin-top: 12px;
+  margin-left: 5%;
+ border-radius: 20px 20px 20px 20px;
+  border: 5px inset black;
+}
+
+/*.menu1 {
+  flex: 1;
+  margin-right: 10px;
+  background-color: #084ac3;
+}*/
+
+.fin{
+  width: 100%;
+  columns: 2;
+
+}
+
+.piePagina {
+  margin-top: 3%;
+  margin-left: 10%;
+}
+
+.provo{
+  width:230px;
+  height:150;
+  float: right;
+  margin-right: 5%;
+}
