@@ -60,7 +60,7 @@ export class Card {
 const Login = () => {
 
 	window.document.title = 'Login';
-	const [body, setBody] = useState({ username: '', password: '' })
+	const [body, setBody] = useState({ usuario: '', password: '' })
 	const classes = useStyles()
 	
 	const handleChange = (e) => {
@@ -72,14 +72,15 @@ const Login = () => {
         e.preventDefault();
         console.log(body);
 		try{
-            const res = await axios.get('http://localhost:2000/login/'+ body.username+'/'+body.password); 
+            const res = await axios.post('https://provo-backend.herokuapp.com/autenticar-usuario/', body); 
 			if(res.data.length > 0){
 				Swal.fire({
 					icon: 'success',
-					title: 'Bienvenido a PROVO '+body.username,
+					title: 'Bienvenido a PROVO '+res.data[0].nombre,
 					showConfirmButton: false,
 					timer: 3000,
 				}).then(function() {
+					window.localStorage.setItem('usuario', JSON.stringify(res.data[0]))
 					window.location = "/dashboard";
 				});
 			}else{
@@ -112,7 +113,7 @@ const Login = () => {
 
 
 	return (
-		<Grid container component='main' className={classes.root} className= "HideOnMobile" className="all">
+		<Grid container component='main' className={classes.root} >
 			<CssBaseline />
 			<Container maxWidth='xs' className={classes.container}>
 				<div className="efect">
@@ -131,8 +132,8 @@ const Login = () => {
 									margin='normal'
 									variant='outlined'
 									label='Nickname'
-									name='username'
-									value={body.username}
+									name='usuario'
+									value={body.usuario}
 									onChange={handleChange}
 								/>
 								<TextField

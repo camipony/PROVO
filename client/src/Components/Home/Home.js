@@ -225,7 +225,14 @@ export default function Home() {
 	const buttons = (type) =>{
 		
 		if(type == 'Perfil'){
-			console.log(Card.username);
+		const elem = window.localStorage.getItem('usuario')
+        const dato = elem ? JSON.parse(elem) : null
+		Swal.fire({
+			icon: 'success',
+			title: 'Nombre '+dato.nombre,
+			showConfirmButton: false,
+			timer: 3000,
+		})
 		}
 	}
 
