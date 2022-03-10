@@ -1,10 +1,10 @@
-const pool = require('../db');
+const Productos = require('../models/Productos');
 
-const getProductos = (req, res) => {
+const getProductos = async (req, res) => {
     try {
 
-        const product = await pool.query('SELECT * FROM productos');
-        res.json(product.rows);
+        const product = await Productos.findAll();
+        res.json(product);
 
     } catch (error) {
         res.status(500).json({
@@ -16,12 +16,16 @@ const getProductos = (req, res) => {
     }
 }
 
-const getUserProductos = (req, res) => {
+const getUserProductos = async (req, res) => {
     try {
 
         const id = req.params.id;
-        const product = await pool.query('SELECT * FROM productos WHERE id_usuario = $1', [id]);
-        res.json(product.rows);
+        const product = await Productos.findAll({
+            where: {
+                id_usuario: id
+            }
+        });
+        res.json(product);
 
     } catch (error) {
         res.status(500).json({
@@ -33,11 +37,11 @@ const getUserProductos = (req, res) => {
     }
 }
 
-const getProducto = (req, res) => {
+const getProducto = async (req, res) => {
     try {
         
         const id = req.params.id;
-        const product = await pool.query('SELECT * FROM productos WHERE id = $1', [id]);
+        const product = await Productos.findByPk(id);
         res.json(product);
 
     } catch (error) {
@@ -50,13 +54,18 @@ const getProducto = (req, res) => {
     }
 }
 
-const crearProducto = (req, res) => {
+const crearProducto = async (req, res) => {
     try {
 
         const {id_usuario, nombre, precio, descripcion, categoria, cantidad} = req.body;
-        const comando = 'INSERT INTO productos (id_usuario, name_product, precio, descripcion, categoria, cantidad_exitente_producto) VALUES ($1, $2, $3, $4, $5, $6)';
-        const values = [id_usuario, nombre, precio, descripcion, categoria, cantidad];
-        await pool.query(comando, values);
+        await Productos.create({
+            id_usuario: id_usuario,
+            nombre: nombre,
+            precio: precio, 
+            descripcion: descripcion, 
+            categoria: categoria, 
+            cantidad_exitente_producto: cantidad
+        });
 
         res.json({
             message : 'Se creado el producto',
@@ -82,14 +91,21 @@ const crearProducto = (req, res) => {
     }
 }
 
-const actualizarProducto = (req, res) => {
+const actualizarProducto = async (req, res) => {
     try {
 
         const id = req.param.id;
         const {nombre, precio, descripcion, categoria, cantidad} = req.body;
-        const comando = 'UPDATE productos SET nombre = $2 precio = $3 descripcion = $4 categoria = $5 cantidad total_a_pagar = $6 WHERE id = $1';
-        const values = [id, nombre, precio, descripcion, categoria, cantidad];
-        await pool.query(comando, values);
+
+        const product = await Productos.findByPk(id);
+
+        product.update({
+            nombre: nombre,
+            precio: precio, 
+            descripcion: descripcion, 
+            categoria: categoria, 
+            cantidad_exitente_producto: cantidad
+        });
 
         res.json({
             message : 'Se creado el producto',
@@ -115,11 +131,15 @@ const actualizarProducto = (req, res) => {
     }
 }
 
-const eliminarProducto = (req, res) => {
+const eliminarProducto = async (req, res) => {
     try {
         
         const id = req.param.id;
-        await pool.query('DELETE FROM productos WHERE id = $1', [id]);
+        await Productos.destroy({
+            where: {
+                id: id
+            }
+        })
 
         res.json({
             message : 'Se elimino el producto',

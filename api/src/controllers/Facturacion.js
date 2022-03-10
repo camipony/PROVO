@@ -1,13 +1,16 @@
-const pool = require('../db');
+const Facturas = require('../models/Facturas');
+const Productos = require('../models/Productos');
+const Item_factura = require('../models/Item_factura');
+const { Op } = require('@sequelize/core');
 
 const getFacturas  = async (req, res) => {
     try{
 
-        const response = await pool.query('select * from facturas'); 
-        const itemResponse = await pool.query('select * from item_factura');
-        const productos = await pool.query('select * from productos');
+        const response = await Facturas.findAll();
+        const itemResponse = await Item_factura.findAll();
+        const productos = await Productos.findAll();
 
-        const jsonFile = response.rows.map( factura => {
+        const jsonFile = response.map( factura => {
             return {
                 id: factura.id,
                 id_usuario: factura.id_usuario,
@@ -15,9 +18,9 @@ const getFacturas  = async (req, res) => {
                 total_productos: factura.total_productos,
                 fecha_creacion: factura.fecha_creacion,
                 activa: factura.activa,
-                item: itemResponse.rows.map( itemdata => {
+                item: itemResponse.map( itemdata => {
                     if( itemdata.id_factura == factura.id ){
-                        productos.rows.map( product => {
+                        productos.map( product => {
                             if( itemdata.id_producto === product.id ){
                                 return {
                                     id: itemdata.id,
@@ -53,20 +56,24 @@ const getFactura = async (req, res) => {
     try{
     
         const id = [req.params.id]
-        const response = await pool.query('select * from facturas where id = $1', [id]); 
-        const itemResponse = await pool.query('select * from item_factura where id_factura = $1', [id]);
-        const productos = await pool.query('select * from productos');
+        const response = await Facturas.findByPk(id);
+        const itemResponse = await Item_factura.findAll({
+            where:{
+                id_factura: id
+            }
+        })
+        const productos = await Productos.findAll();
 
-        const jsonFile = response.rows.map( factura => {
+        const jsonFile = (() => {
             return {
-                id: factura.id,
-                id_usuario: factura.id_usuario,
-                total_a_pagar: factura.total_a_pagar,
-                total_productos: factura.total_productos,
-                fecha_creacion: factura.fecha_creacion,
-                activa: factura.activa,
-                item: itemResponse.rows.map( itemdata => {
-                    productos.rows.map( product => {
+                id: response.id,
+                id_usuario: response.id_usuario,
+                total_a_pagar: response.total_a_pagar,
+                total_productos: response.total_productos,
+                fecha_creacion: response.fecha_creacion,
+                activa: response.activa,
+                item: itemResponse.map( itemdata => {
+                    productos.map( product => {
                         if( itemdata.id_producto === product.id ){
                             return {
                                 id: itemdata.id,
@@ -99,11 +106,20 @@ const getUserFactura = async (req, res) => {
     try{
     
         const id = [req.params.id]
-        const response = await pool.query('select * from facturas where id_usuario = $1 AND activo = true', [id]); 
-        const itemResponse = await pool.query('select * from item_factura');
-        const productos = await pool.query('select * from productos where id_usuario = $1', [id]);
+        const response = await Facturas.findAll({
+            where: {
+                id_usuario: id,
+                activa: true
+            }
+        }) 
+        const itemResponse = await Item_factura.findAll();
+        const productos = await Productos.findAll({
+            where:{
+                id_usuario: id
+            }
+        })
 
-        const jsonFile = response.rows.map( factura => {
+        const jsonFile = response.map( factura => {
             return {
                 id: factura.id,
                 id_usuario: factura.id_usuario,
@@ -111,9 +127,9 @@ const getUserFactura = async (req, res) => {
                 total_productos: factura.total_productos,
                 fecha_creacion: factura.fecha_creacion,
                 activa: factura.activa,
-                item: itemResponse.rows.map( itemdata => {
+                item: itemResponse.map( itemdata => {
                     if( itemdata.id_factura == factura.id ){
-                        productos.rows.map( product => {
+                        productos.map( product => {
                             if( itemdata.id_producto === product.id ){
                                 return {
                                     id: itemdata.id,
@@ -148,11 +164,20 @@ const getUserHistoryFactura = async (req, res) => {
     try{
     
         const id = [req.params.id]
-        const response = await pool.query('select * from facturas where id_usuario = $1 AND activo = false', [id]); 
-        const itemResponse = await pool.query('select * from item_factura');
-        const productos = await pool.query('select * from productos where id_usuario = $1', [id]);
+        const response = await Facturas.findAll({
+            where:{
+                id_usuario: id,
+                activa: false
+            }
+        })
+        const itemResponse = await Item_factura.findAll();
+        const productos = await Productos.findAll({
+            where:{
+                id_usuario: id
+            }
+        })
 
-        const jsonFile = response.rows.map( factura => {
+        const jsonFile = response.map( factura => {
             return {
                 id: factura.id,
                 id_usuario: factura.id_usuario,
@@ -160,9 +185,9 @@ const getUserHistoryFactura = async (req, res) => {
                 total_productos: factura.total_productos,
                 fecha_creacion: factura.fecha_creacion,
                 activa: factura.activa,
-                item: itemResponse.rows.map( itemdata => {
+                item: itemResponse.map( itemdata => {
                     if( itemdata.id_factura == factura.id ){
-                        productos.rows.map( product => {
+                        productos.map( product => {
                             if( itemdata.id_producto === product.id ){
                                 return {
                                     id: itemdata.id,
@@ -196,9 +221,9 @@ const getUserHistoryFactura = async (req, res) => {
 const getItemFactura = async (req, res) => {
     try{
 
-        const itemResponse = await pool.query('select * from item_factura');
+        const itemResponse = await Item_factura.findAll();
 
-        res.json( itemResponse.rows );
+        res.json( itemResponse );
 
     } catch (error) {
         res.status(500).json({
@@ -216,9 +241,13 @@ const createFactura = async (req, res) => {
             id_usuario
         } = req.body;
 
-        const coman = 'INSERT INTO facturas (id_usuario, total_a_pagar, total_productos, fecha_creacion, activa) VALUES ($1, $2, $3, $4, $5)';
-        const values = [id_usuario, 0, 0, new Date().toISOString(), true];
-        await pool.query(coman, values);
+        await Facturas.create({
+            id_usuario: id_usuario, 
+            total_a_pagar: 0, 
+            total_productos: 0, 
+            fecha_creacion: new Date().toISOString(), 
+            activa: true
+        })
 
         res.json({
             message : 'Se creado la factura',
@@ -246,10 +275,11 @@ const createFactura = async (req, res) => {
 const addItemFactura = async (req, res) => {
     try{
         const {id_factura, id_producto, cantidad_producto} = req.body;
-
-        const coman = 'INSERT INTO item_factura (id_factura, id_producto, cantidad_producto) VALUES ($1, $2, $3)';
-        const values = [id_factura, id_producto, cantidad_producto];
-        await pool.query(coman, values);
+        await Item_factura.create({
+            id_factura, 
+            id_producto, 
+            cantidad_producto
+        })
 
         res.json({
             message : 'Se añadio el producto a la factura con exito',
@@ -277,32 +307,41 @@ const actualizarFactura = async (req, res) => {
         const id = res.params.id;
         const {activa} = req.body;
 
-        const itemFactura = await pool.query('select * from item_factura where id_factura = $1', [id]);
-        const productos = await pool.query('select * from productos');
+        const itemFactura = await Item_factura.findAll({
+            where:{
+                id_factura: id
+            }
+        })
+
+        const productos = await Productos.findAll();
 
         let totalPago = 0;
 
-        itemFactura.rows.map( item => {
-            productos.rows.map( product => {
+        itemFactura.map( item => {
+            productos.map( product => {
                 if( item.id_producto === product.id ){
                     totalPago += item.cantidad_producto * product.precio;
                 }
             } )
         } )
 
-        const coman = 'UPDATE facturas SET activa = $2 total_productos = $3 total_a_pagar = $4 WHERE id = $1';
-        const values = [id, activa, itemFactura.rows.length, totalPago];
-        await pool.query(coman, values);
+        const facturas = await Facturas.findByPk(id);
+        facturas.update({
+            total_a_pagar: totalPago, 
+            total_productos: itemFactura.length, 
+            activa: activa
+        });
 
         if( !activa ){
-            itemFactura.rows.map( item => {
-                productos.rows.map( product => {
+            itemFactura.map( item => {
+                productos.map( async product => {
                     if( item.id_producto === product.id ){
                         let newCantidadExistente = product.cantidad_exitente_producto - item.cantidad_producto;
-                        await pool.query('UPDATE productos SET cantidad_exitente_producto = $2 WHERE id = $1', [
-                            product.id,
-                            newCantidadExistente
-                        ]);
+                        await Productos.update({ cantidad_exitente_producto: newCantidadExistente }, {
+                            where:{
+                                id: product.id
+                            }
+                        })
                     }
                 } )
             } )
@@ -315,7 +354,7 @@ const actualizarFactura = async (req, res) => {
                 dato : {
                     id_usuario: id_usuario, 
                     total_a_pagar: totalPago, 
-                    total_productos: itemFactura.rows.length, 
+                    total_productos: itemFactura.length, 
                     activa: activa
                 }
             }
@@ -337,10 +376,11 @@ const actualizarItemFactura = async (req, res) => {
         const id = res.params.id;
         const {cantidad_producto} = req.body;
 
-        await pool.query('UPDATE item_factura SET cantidad_producto = $2 WHERE id = $1', [
-            id,
-            cantidad_producto
-        ]);
+        await Item_factura.update({ cantidad_producto: cantidad_producto }, {
+            where:{
+                id:id
+            }
+        })
 
         res.json({
             message : 'Se actualizo el producto de la factura',
@@ -368,8 +408,18 @@ const eliminarFactura = async (req, res) => {
 
         const id = req.params.id;
 
-        await pool.query('DELETE FROM facturas WHERE id = $1', [id]);
-        await pool.query('DELETE FROM item_factura WHERE id_factura = $1', [id]);
+        await Item_factura.destroy({
+            where:{
+                id_factura:id
+            }
+        })
+
+        await Facturas.destroy({
+            where:{
+                id:id
+            }
+        })
+
 
         res.json({
             message : 'Se elimnado la factura',
@@ -392,7 +442,11 @@ const eliminarItemFactura = async (req, res) => {
     try {
 
         const id = req.params.id;
-        await pool.query('DELETE FROM item_factura WHERE id = $1', [id]);
+        await Item_factura.destroy({
+            where:{
+                id:id
+            }
+        })
 
         res.json({
             message : 'Se elimnado el producto de la factura',
