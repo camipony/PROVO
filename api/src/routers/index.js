@@ -1,6 +1,10 @@
 const {Router} = require('express');
 const router = Router();
 
+router.get('/', (req, res) => {
+    res.send('<h1>Ruta no encontrada<h1>');
+})
+
 /* Usuario */
 const {
     getUsers,
@@ -54,7 +58,7 @@ const {
 
 router.get('/all-facturas', getFacturas);
 router.get('/factura/:id', getFactura);
-router.get('/factura-activa/id', getUserFactura);
+router.get('/factura-activa/:id', getUserFactura);
 router.get('/historia-facturas/:id', getUserHistoryFactura);
 router.get('/item-facturas', getItemFactura);
 router.post('/facturas', createFactura);

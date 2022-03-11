@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/alt-text */
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
+import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
 
 //import '../../Styles/Facturacion/facturacionStyle.css'
@@ -14,20 +15,32 @@ export const Facturacion = () => {
 
     let [creadoFactura, setCreadoFactura] = useState(false);
     const userContext = useContext(UserContext);
-    const {usuarioAutenticado} = userContext;
+    const {usuarioAutenticado, verificarAutenticada} = userContext;
 
-    if( usuarioAutenticado ){
-        Swal.fire({
-        icon: 'error',
-        title: ' Debes iniciar secion ',
-        showConfirmButton: false,
-        timer: 3000,
-        }).then(function() {
-        window.location = "/login";
-        });
-        return <>
-        </>
-    }
+    const navigate = useNavigate();
+    
+    useEffect(() => {
+
+		const elem = window.localStorage.getItem('usuario')
+        const dato = elem ? JSON.parse(elem) : null
+
+		if(dato || usuarioAutenticado){
+			verificarAutenticada();
+		}
+        else{
+            Swal.fire({
+                icon: 'error',
+                title: ' Debes iniciar secion ',
+                showConfirmButton: false,
+                timer: 3000,
+            }).then(function() {
+                navigate("/login");
+            });
+            
+            return <></>
+        }
+
+	}, [])
 
     const activeGenereFactura = () => {
         setCreadoFactura(creadoFactura = !creadoFactura);
@@ -50,7 +63,7 @@ export const Facturacion = () => {
                 <div className='headerHF'>
                     <div className='contButtonHead' >
                         <button onClick={ () => {
-                            window.location = "/dashboard";
+                            navigate("/dashboard");
                         }}>
                             <ion-icon name="home-outline"></ion-icon>
                         </button> 

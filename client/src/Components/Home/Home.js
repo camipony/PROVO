@@ -1,6 +1,7 @@
 
 import { styled, useTheme } from '@mui/material/styles';
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
+import {Card} from '../Login/Card'
 import ListItemButton from '@mui/material/ListItemButton';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
@@ -26,8 +27,11 @@ import inventory from '../../assets/inventory.png';
 import products from '../../assets/products.png';
 import sales from '../../assets/sales.png';
 import support from '../../assets/support.png';
-
+import Swal from 'sweetalert2';
 import '../../Styles/Home/home.css';
+/* Context */
+import UserContext from '../../Context/User/UserContext';
+import { useNavigate } from "react-router-dom";
 
 window.document.title = 'Home -> Dashboard';
 const drawerWidth = 240;
@@ -40,7 +44,8 @@ const useStyles = makeStyles(theme => ({
 		height: '100vh',
 	},
 	typography: {
-		color: "#414141",
+		color: "#606060",
+		fontFamily: 'Open Sans Condensed',
 
 	  }
 	  
@@ -152,8 +157,6 @@ const Image = styled('span')(({ theme }) => ({
 	color: theme.palette.common.white,
 }));
 
-
-
 const ImageBackdrop = styled('span')(({ theme }) => ({
 	position: 'absolute',
 	left: 0,
@@ -175,12 +178,47 @@ const ImageMarked = styled('span')(({ theme }) => ({
 }));
 
 
-export default function Login() {
+export default function Home() {
 	const theme = useTheme();
 	const [open, setOpen] = React.useState(false);
-	const [body, setBody] = useState({ nickname: '', password: '' })
+
+	const userContext = useContext(UserContext);
+  	const {usuarioAutenticado, verificarAutenticada, cargando, datoUsuario} = userContext;
+	const navigate = useNavigate();
+
 	const classes = useStyles()
 
+	useEffect(() => {
+
+		const elem = window.localStorage.getItem('usuario')
+        const dato = elem ? JSON.parse(elem) : null
+
+		if(usuarioAutenticado || dato){
+
+			verificarAutenticada();
+
+			
+		}else{
+            Swal.fire({
+                icon: 'error',
+                title: ' Debes iniciar secion ',
+                showConfirmButton: false,
+                timer: 3000,
+            }).then(function() {
+                navigate("/login");
+            });
+            
+            return <></>
+        }
+
+	}, [])
+	
+	const handleSubmit = async (e) =>{
+		//setBody({...body,[e.target.name]: e.target.value});
+		//console.log("handleChange"+ body);
+		buttons('Perfil');
+        
+    };
 
 	/** For the Buttons */
 	const images = [
@@ -208,20 +246,32 @@ export default function Login() {
 	];
 
 	const onSubmit = () => {
-		console.log(body)
+		//xconsole.log(body)
 
+	}
+
+	const buttons = (type) =>{
+		
+		if(type == 'Perfil'){
+			Swal.fire({
+				icon: 'success',
+				title: 'Nombre '+ datoUsuario.nombre,
+				showConfirmButton: false,
+				timer: 3000,
+			})
+		}
 	}
 
 	const toFunction = (title) => {
 		console.log(title);
 		if(title === 'Inventario'){
-			window.location = "/login";
+			navigate("/inventario");
 		}else if(title === 'Productos'){
-			window.location = "/productos";
+			navigate("/productos");
 		}else if(title === 'Contabilidad'){
-			window.location = "/margenventas";
+			navigate("/margen");
 		}else if(title === 'Ayuda'){
-			window.location = "/ayuda";
+			navigate("/ayuda");
 		}
 	};
 
@@ -264,12 +314,9 @@ export default function Login() {
 				</DrawerHeader>
 				<Divider />
 				<List>
-					<ListItemButton>
-					<ListItemIcon>
-					<AccountCircleIcon />
-					</ListItemIcon>
-					<ListItemText primary="Perfil" />
-				</ListItemButton>
+					<ListItemButton onClick={(e) => handleSubmit(e)}>
+						<ListItemIcon><AccountCircleIcon /></ListItemIcon>
+						<ListItemText primary="Perfil" /></ListItemButton>
 				<ListItemButton>
 					<ListItemIcon>
 					<ViewListIcon />

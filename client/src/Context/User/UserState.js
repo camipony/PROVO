@@ -8,38 +8,109 @@ const UserState = (props) => {
 
     const inicialState = {
         usuarioAutenticado: false,
-        datoUsuario: []
+        cargando: false,
+        datoUsuario: {}
     }
 
-    const [state, dispatch] = useReducer(UserReducer, inicialState)
+    const [state, dispatch] = useReducer(UserReducer, inicialState);
 
-    const autenticarUsuario = async ( dato ) => {
-        try{
+    const obtenerUsuario = async ( id ) => {
+        state.cargando = true;
+        state.usuarioAutenticado = false;
+        state.datoUsuario = null;
+        try {
+            const res = await axios.get('https://provo-backend.herokuapp.com/'+id);
 
-            const res = await axios.get(''+ dato.username+'/'+ dato.password); 
-            if( res.data ){
+            if( res.data.length > 0 ){
                 dispatch({
-                    type: 'AUTENTICAR_USUARIO_CORRECTA',
-                    payload: res.data
-                })
+                    type: 'OBTENER_USUARIO',
+                    payload: res.data[0]
+                })  
             }
             else{
                 dispatch({
-                    type: 'AUTENTICAR_USUARIO_ERROR',
-                    payload: res.data
+                    type: 'NO_EXISTE_USUARIO',
+                    payload: null
                 })
-            }            
+            }
+
+        } catch (error) {
+            
+        }
+        finally{
+            state.cargando = false;
+        }
+    }
+
+    const autenticarUsuario = async ( dato ) => {
+        state.cargando = true;        
+        state.usuarioAutenticado = false;
+        try{
+
+            const res = await axios.post('https://provo-backend.herokuapp.com/autenticar-usuario/', dato); 
+            console.log(res.data[0])
+            if( res.data.length > 0 ){
+
+                state.usuarioAutenticado = true;
+                state.datoUsuario = res.data[0];
+                
+                dispatch({
+                    type: 'AUTENTICAR_USUARIO',
+                    payload: res.data[0]
+                }) 
+
+            }
+            else{
+                dispatch({
+                    type: 'NO_EXISTE_USUARIO',
+                    payload: null
+                })
+            }
+                    
 
         }catch(e){
             state.error = true;
             console.log(e)
         }
+        finally{
+            state.cargando = false;
+        }
+    }
+
+    const verificarAutenticada = () => {
+        const elem = window.localStorage.getItem('usuario')
+        const dato = elem ? JSON.parse(elem) : null
+
+        if( dato != null ){
+            const datoautenticar = {
+                usuario: dato.email,
+                password: dato.password
+            }
+            autenticarUsuario(datoautenticar);
+        }
+        else{
+            state.usuarioAutenticado = false;
+        }
+    }
+
+    const cerrarSecion = () => {
+        try {
+            window.localStorage.removeItem('usuario');
+        } catch (error) {
+            console.log(error)
+        }
+        state.cargando = true;
+        state.datoUsuario = [];
+        state.usuarioAutenticado = false;
     }
 
     return <UserContext.Provider value = {{
         usuarioAutenticado: state.usuarioAutenticado,
         datoUsuario: state.datoUsuario,
-        autenticarUsuario
+        cargando: state.cargando,
+        autenticarUsuario,
+        obtenerUsuario,
+        verificarAutenticada
     }} >
         {props.children}
     </UserContext.Provider>
