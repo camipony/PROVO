@@ -93,6 +93,14 @@ const UserState = (props) => {
         }
     }
 
+    const darDatos = (datos) => {
+        window.localStorage.setItem('usuario', JSON.stringify(datos));
+        dispatch({
+            type: 'AUTENTICAR_USUARIO',
+            payload: datos
+        }) 
+    }
+
     const cerrarSecion = () => {
         try {
             window.localStorage.removeItem('usuario');
@@ -110,7 +118,9 @@ const UserState = (props) => {
         cargando: state.cargando,
         autenticarUsuario,
         obtenerUsuario,
-        verificarAutenticada
+        verificarAutenticada,
+        cerrarSecion,
+        darDatos
     }} >
         {props.children}
     </UserContext.Provider>

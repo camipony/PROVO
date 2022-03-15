@@ -34,6 +34,9 @@ const {
     eliminarProducto
 } = require('../controllers/Productos');
 
+router.get('/testAPI', (req, res) => {
+    res.send('API is working properly');
+});
 router.get('/all-productos', getProductos);
 router.get('/producto/:id', getProducto);
 router.get('/productos/:id', getUserProductos);
@@ -56,7 +59,7 @@ const {
     eliminarItemFactura
 } = require('../controllers/Facturacion');
 
-router.get('/all-facturas', getFacturas);
+router.get('/all-facturas', getFacturas); 
 router.get('/factura/:id', getFactura);
 router.get('/factura-activa/:id', getUserFactura);
 router.get('/historia-facturas/:id', getUserHistoryFactura);

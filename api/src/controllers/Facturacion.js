@@ -55,7 +55,7 @@ const getFacturas  = async (req, res) => {
 const getFactura = async (req, res) => {
     try{
     
-        const id = [req.params.id]
+        const id = req.params.id
         const response = await Facturas.findByPk(id);
         const itemResponse = await Item_factura.findAll({
             where:{
@@ -64,32 +64,30 @@ const getFactura = async (req, res) => {
         })
         const productos = await Productos.findAll();
 
-        const jsonFile = (() => {
-            return {
-                id: response.id,
-                id_usuario: response.id_usuario,
-                total_a_pagar: response.total_a_pagar,
-                total_productos: response.total_productos,
-                fecha_creacion: response.fecha_creacion,
-                activa: response.activa,
-                item: itemResponse.map( itemdata => {
-                    productos.map( product => {
-                        if( itemdata.id_producto === product.id ){
-                            return {
-                                id: itemdata.id,
-                                id_factura: itemdata.id_factura,
-                                id_producto: itemdata.id_producto,
-                                nombre: product.name_product,
-                                precio: product.precio,
-                                descripcion: product.descripcion,
-                                categoria: product.categoria,
-                                cantidad_producto: itemdata.cantidad_producto
-                            }
+        const jsonFile = {
+            id: response.id,
+            id_usuario: response.id_usuario,
+            total_a_pagar: response.total_a_pagar,
+            total_productos: response.total_productos,
+            fecha_creacion: response.fecha_creacion,
+            activa: response.activa,
+            item: itemResponse.map( itemdata => {
+                productos.map( product => {
+                    if( itemdata.id_producto === product.id ){
+                        return {
+                            id: itemdata.id,
+                            id_factura: itemdata.id_factura,
+                            id_producto: itemdata.id_producto,
+                            nombre: product.name_product,
+                            precio: product.precio,
+                            descripcion: product.descripcion,
+                            categoria: product.categoria,
+                            cantidad_producto: itemdata.cantidad_producto
                         }
-                    } )                    
-                } )
-            }
-        } )
+                    }
+                } )                    
+            } )
+        }
 
         res.json(jsonFile);
     } catch (error) {
@@ -105,7 +103,7 @@ const getFactura = async (req, res) => {
 const getUserFactura = async (req, res) => {
     try{
     
-        const id = [req.params.id]
+        const id = req.params.id
         const response = await Facturas.findAll({
             where: {
                 id_usuario: id,
@@ -163,7 +161,7 @@ const getUserFactura = async (req, res) => {
 const getUserHistoryFactura = async (req, res) => {
     try{
     
-        const id = [req.params.id]
+        const id = req.params.id
         const response = await Facturas.findAll({
             where:{
                 id_usuario: id,

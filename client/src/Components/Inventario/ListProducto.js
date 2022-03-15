@@ -9,11 +9,11 @@ const ListProducto= () => {
 
   const deleteProducto = async id => {
     try {
-      const deleteProduct = await fetch(`http://localhost:9000/productos/${id}`, {
+      const deleteProducto = await fetch(`https://provo-backend.herokuapp.com/productos/${id}`, {
         method: "DELETE"
       });
 
-      setProducto(producto.filter(producto => producto.producto_id !== id));
+      setProducto(producto.filter(producto => producto.id !== id));
     } catch (err) {
       console.error(err.message);
     }
@@ -21,8 +21,15 @@ const ListProducto= () => {
 
   const getProducto = async () => {
     try {
-      const response = await fetch("http://localhost:9000");
+
+      const elem = window.localStorage.getItem('usuario')
+      const dato = elem ? JSON.parse(elem) : null
+
+      const response = await fetch(`https://provo-backend.herokuapp.com/productos/${dato.id}`);
       const jsonData = await response.json();
+      console.log(
+        jsonData
+      )
 
       setProducto(jsonData);
     } catch (err) {
@@ -39,7 +46,7 @@ const ListProducto= () => {
   return (
     <Fragment>
       {" "}
-      <table class="table mt-5 text-center">
+      <table className="table mt-5 text-center">
         <thead>
           <tr>
             <th>Nombre</th>
@@ -54,15 +61,15 @@ const ListProducto= () => {
             <td>john@example.com</td>
           </tr> */}
           {producto.map(todo => (
-            <tr key={todo.todo_id}>
-              <td>{todo.description}</td>
+            <tr key={todo.id}>
+              <td>{todo.nombre}</td>
               <td>
                 <EditProducto todo={todo} />
               </td>
               <td>
                 <button
                   className="btn btn-danger"
-                  onClick={() => deleteProducto(todo.todo_id)}
+                  onClick={() => deleteProducto(todo.id)}
                 >
                   Delete
                 </button>

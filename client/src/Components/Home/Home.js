@@ -183,7 +183,7 @@ export default function Home() {
 	const [open, setOpen] = React.useState(false);
 
 	const userContext = useContext(UserContext);
-  	const {usuarioAutenticado, verificarAutenticada, cargando, datoUsuario} = userContext;
+  	const {usuarioAutenticado, verificarAutenticada, cerrarSecion, datoUsuario} = userContext;
 	const navigate = useNavigate();
 
 	const classes = useStyles()
@@ -252,13 +252,17 @@ export default function Home() {
 
 	const buttons = (type) =>{
 		
-		if(type == 'Perfil'){
+		if(type === 'Perfil'){
 			Swal.fire({
 				icon: 'success',
 				title: 'Nombre '+ datoUsuario.nombre,
 				showConfirmButton: false,
 				timer: 3000,
 			})
+		}
+		if(type === 'Cerrar sesión'){
+			cerrarSecion();
+			navigate("/login");
 		}
 	}
 
@@ -269,7 +273,7 @@ export default function Home() {
 		}else if(title === 'Productos'){
 			navigate("/productos");
 		}else if(title === 'Contabilidad'){
-			navigate("/margen");
+			navigate("/margenventas");
 		}else if(title === 'Ayuda'){
 			navigate("/ayuda");
 		}
@@ -329,7 +333,7 @@ export default function Home() {
 					</ListItemIcon>
 					<ListItemText primary="Sobre PROVO." />
 				</ListItemButton>
-				<ListItemButton>
+				<ListItemButton onClick={() => buttons('Cerrar sesión')}>
 					<ListItemIcon>
 					<LoginIcon />
 					</ListItemIcon>

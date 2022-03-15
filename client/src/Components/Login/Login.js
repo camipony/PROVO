@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import { Grid, Container, TextField, Button, CssBaseline } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@mui/material/Box';
+import axios from 'axios'
 import '../../Styles/Login/login.css';
 import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
@@ -50,7 +51,7 @@ const useStyles = makeStyles(theme => ({
 const Login = () => {
 
 	const userContext = useContext(UserContext);
-  	const {usuarioAutenticado, autenticarUsuario, verificarAutenticada, cargando, datoUsuario} = userContext;
+  	const {darDatos, verificarAutenticada, datoUsuario} = userContext;
 
 	const navigate = useNavigate();
 
@@ -79,47 +80,58 @@ const Login = () => {
 
         e.preventDefault();
 
-        autenticarUsuario( body ).then(() => {
-			if(cargando){
+		try{
+
+            const res = await axios.post('https://provo-backend.herokuapp.com/autenticar-usuario/', body); 
+            console.log(res.data[0])
+            if( res.data.length > 0 ){
 
 				Swal.fire({
 					title: 'Verificando informacion',
-					timer: 1500,
+					timer: 1000,
 					timerProgressBar: true,
 					didOpen: () => {
 						Swal.showLoading()
 					}
 				}).then(() => {
 
-					console.log(datoUsuario);
-					console.log(usuarioAutenticado);
-
-					if( datoUsuario || usuarioAutenticado ){
-						//
-						Swal.fire({
-							icon: 'success',
-							title: 'Bienvenido a PROVO '+ datoUsuario.nombre,
-							showConfirmButton: false,
-							timer: 3000,
-						}).then(function() {
-							window.localStorage.setItem('usuario', JSON.stringify(datoUsuario));
-							navigate("/dashboard");
-						});
+					Swal.fire({
+						icon: 'success',
+						title: 'Bienvenido a PROVO '+ res.data[0].nombre,
+						showConfirmButton: false,
+						timer: 3000,
+					}).then(function() {
+						darDatos(res.data[0])
+						navigate("/dashboard");
+					});
 						
-					}
-					else{
-						Swal.fire({
-							icon: 'error',
-							title: 'No estás registrado',
-							showConfirmButton: false,
-							timer: 2000,
-						});	
-					}
-					
 				})
+				
+            }
+            else{
 
-			}
-		})
+				Swal.fire({
+					title: 'Verificando informacion',
+					timer: 1000,
+					timerProgressBar: true,
+					didOpen: () => {
+						Swal.showLoading()
+					}
+				}).then(() => {
+					Swal.fire({
+						icon: 'error',
+						title: 'No estás registrado',
+						showConfirmButton: false,
+						timer: 2000,
+					});
+				})
+				
+            }
+                    
+
+        }catch(e){
+            console.log(e)
+        }
 		
     };
 
@@ -177,7 +189,7 @@ const Login = () => {
 								>Sign In</Button>
 								<div className= "white"><a href='/forgot' >Olvidé mi contraseña.</a>
 								<br></br>
-								<a href='/signin' >¡Registrarme!</a></div>
+								<a href='/register' >¡Registrarme!</a></div>
 							</form>
 						</div>
 					</Box>

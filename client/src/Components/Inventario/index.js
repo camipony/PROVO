@@ -1,28 +1,30 @@
 import React, { Component } from "react";
-import "../../Styles/inventario.css";
-import "../../Styles/App.css";
+import "../../Styles/Inventario/inventario.css";
+import "../../Styles/Inventario/App.css";
 //import "../../Components/Inventario/funcion.js";
 import casa from "../../assets/casa.png";
 import provo2 from "../../assets/provo2.png";
 // import { AiOutlineHome } from 'react-icons/ai';
-import "../../Styles/mediaProductos.css";
+import "../../Styles/Inventario/mediaProductos.css";
 
-import InputProducto from "./Components/Inventario/InputProducto.js";
-import ListProducto from "./Components/Inventario/ListProducto.js";
+import InputProducto from "./InputProducto.js";
+import ListProducto from "./ListProducto.js";
 
 export default class index extends Component {
   constructor(props) {
     super(props);
     this.state = { apiResponse: "" };
 
-    this.state = { isToggleOn: true };
+    this.state = { 
+      isToggleOn: true,
+    };
 
     // Este enlace es necesario para hacer que `this` funcione en el callback
     this.handleClick = this.handleClick.bind(this);
   }
 
   callAPI() {
-    fetch("http://localhost:9000/testAPI")
+    fetch("https://provo-backend.herokuapp.com/testAPI")
       .then((res) => res.text())
       .then((res) => this.setState({ apiResponse: res }));
   }
@@ -35,6 +37,7 @@ export default class index extends Component {
     this.setState((prevState) => ({
       isToggleOn: !prevState.isToggleOn,
     }));
+    window.location = "/dashboard";
   }
 
   render() {
@@ -69,8 +72,8 @@ export default class index extends Component {
           <img src={provo2} alt="Logo Provo" className="provo" />
         </div>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="funcion.js"></script>
+        {/* <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="funcion.js"></script> */}
         <p className="App-intro">;{this.state.apiResponse}</p>
       </>
     );

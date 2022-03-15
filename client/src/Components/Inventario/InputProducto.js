@@ -5,15 +5,29 @@ const InputProducto = () => {
 
   const onSubmitForm = async e => {
     e.preventDefault();
+
+    const elem = window.localStorage.getItem('usuario')
+    const dato = elem ? JSON.parse(elem) : null
+
     try {
-      const body = { nombre };
-      const response = await fetch("http://localhost:9000/productos", {
+      const body = {
+        id_usuario: dato.id,
+        nombre: nombre,
+        precio: 1000, 
+        descripcion: '', 
+        categoria: '', 
+        cantidad_exitente_producto: 1
+      };
+      console.log(body)
+      const response = await fetch("https://provo-backend.herokuapp.com/productos/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body)
       });
 
-      window.location = "/";
+      console.log(response)
+
+      window.location = "/productos";
     } catch (err) {
       console.error(err.message);
     }
@@ -21,18 +35,36 @@ const InputProducto = () => {
 
   return (
     <Fragment>
-      <h1 className="text-center mt-5">CRUD Provo</h1>
-      <form className="d-flex mt-5" onSubmit={onSubmitForm}>
-        <input
-          type="text"
-          className="form-control"
-          value={nombre}
-          onChange={e => setNombre(e.target.value)}
-        />
-        <button className="btn btn-success">Add</button>
+
+
+<form className="d-flex mt-5" onSubmit={onSubmitForm}>  
+<div className="form-control">
+    <label htmlFor="inputProduct" className="visually-hidden">Product</label>
+    <input type="text" className="form-control"
+    value={nombre}
+    onChange={e => setNombre(e.target.value)}
+    id="inputProduct" placeholder="Product"/>
+  </div>
+    <button className="btn btn-success ">Add</button>
+  
       </form>
+  
+
+
     </Fragment>
   );
 };
 
 export default InputProducto;
+
+/* 
+      <form className="d-flex mt-5" onSubmit={onSubmitForm}>  
+      </form>
+      <input
+          type="text"
+          className="form-group "
+          value={nombre}
+          onChange={e => setNombre(e.target.value)}
+        />
+        <button className="btn btn-success">Add</button>
+       <small id="emailHelp" class="form-text text-muted">Insert the product in your inventary.</small> */

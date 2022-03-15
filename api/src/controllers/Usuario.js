@@ -1,6 +1,7 @@
 const Usuario = require('../models/Usuarios');
 const Facturas = require('../models/Facturas');
 const { Op } = require('@sequelize/core');
+const Item_factura = require('../models/Item_factura');
 
 const getUsers = async (req, res) => {
   try {
@@ -21,7 +22,7 @@ const getUsers = async (req, res) => {
 const getUser = async (req, res) => {
   try {
 
-    const id = req.param.id;
+    const id = req.params.id;
     const usuario = await Usuario.findByPk(id);
     res.json(usuario);
 
@@ -105,7 +106,7 @@ const crearUsuario = async (req, res) =>{
 const actualizarUsuario = async (req, res) => {
   try {
 
-    const id = req.param.id;
+    const id = req.params.id;
     const {nombre, username} = req.body;
 
     await User.update({ nombre: nombre, username: username }, {
@@ -136,7 +137,7 @@ const actualizarUsuario = async (req, res) => {
 const cambiarPassword = async (req, res) => {
   try {
 
-    const id = req.param.id;
+    const id = req.params.id;
     const {password} = req.body;
     const usuarios = await User.update({ password: password }, {
       where: {
@@ -162,11 +163,33 @@ const cambiarPassword = async (req, res) => {
 const eliminarUsuarios = async (req, res) => {
   try {
 
-    const id = req.param.id;
+    const id = req.params.id;
+
+    console.log(id);
 
     await Usuario.destroy({
       where: {
         id: id
+      }
+    });
+
+    const facturas = await Facturas.findAll({
+      where:{
+        id_usuario: id
+      }
+    })
+
+    facturas.map( async factura => {
+      await Item_factura.destroy({
+        where:{
+          id_factura: factura.id
+        }
+      })
+    } )
+
+    await Facturas.destroy({
+      where:{
+        id_usuario: id
       }
     })
 

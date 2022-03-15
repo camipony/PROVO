@@ -1,16 +1,23 @@
 import React, { Fragment, useState } from "react";
 
-const EditProducto = ({ producto }) => {
-  const [nombre, setNombre] = useState(producto.nombre);
+const EditProducto = (props) => {
+
+  const [nombre, setNombre] = useState(props.todo ? props.todo.nombre : '' );
 
   //edit description function
 
   const updateNombre= async e => {
     e.preventDefault();
     try {
-      const body = { nombre };
+      const body = {
+        nombre: nombre,
+        precio: props.todoprecio, 
+        descripcion: props.tododescripcion, 
+        categoria: props.todo.categoria, 
+        cantidad_exitente_producto: props.todo.cantidad
+      };
       const response = await fetch(
-        `http://localhost:5000/todos/${producto.producto_id}`,
+        `https://provo-backend.herokuapp.com/productos/${props.todo.id}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -18,7 +25,7 @@ const EditProducto = ({ producto }) => {
         }
       );
 
-      window.location = "/";
+      window.location = "/productos";
     } catch (err) {
       console.error(err.message);
     }
@@ -28,9 +35,9 @@ const EditProducto = ({ producto }) => {
     <Fragment>
       <button
         type="button"
-        class="btn btn-warning"
+        className="btn btn-warning"
         data-toggle="modal"
-        data-target={`#id${producto.producto_id}`}
+        data-target={`#id${props.todo.id}`}
       >
         Edit
       </button>
@@ -39,25 +46,25 @@ const EditProducto = ({ producto }) => {
         id = id10
       */}
       <div
-        class="modal"
-        id={`id${producto.producto_id}`}
-        onClick={() => setNombre(producto.nombre)}
+        className="modal"
+        id={`id${props.todo.id}`}
+        onClick={() => setNombre(props.todo.nombre)}
       >
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h4 class="modal-title">Edit Producto</h4>
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h4 className="modal-title">Edit Producto</h4>
               <button
                 type="button"
-                class="close"
+                className="close"
                 data-dismiss="modal"
-                onClick={() => setNombre(producto.nombre)}
+                onClick={() => setNombre(props.todo.nombre)}
               >
                 &times;
               </button>
             </div>
 
-            <div class="modal-body">
+            <div className="modal-body">
               <input
                 type="text"
                 className="form-control"
@@ -66,10 +73,10 @@ const EditProducto = ({ producto }) => {
               />
             </div>
 
-            <div class="modal-footer">
+            <div className="modal-footer">
               <button
                 type="button"
-                class="btn btn-warning"
+                className="btn btn-warning"
                 data-dismiss="modal"
                 onClick={e => updateNombre(e)}
               >
@@ -77,9 +84,9 @@ const EditProducto = ({ producto }) => {
               </button>
               <button
                 type="button"
-                class="btn btn-danger"
+                className="btn btn-danger"
                 data-dismiss="modal"
-                onClick={() => setNombre(producto.nombre)}
+                onClick={() => setNombre(props.todo.nombre)}
               >
                 Close
               </button>

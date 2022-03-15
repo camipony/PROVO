@@ -1,3 +1,4 @@
+const Item_factura = require('../models/Item_factura');
 const Productos = require('../models/Productos');
 
 const getProductos = async (req, res) => {
@@ -94,7 +95,7 @@ const crearProducto = async (req, res) => {
 const actualizarProducto = async (req, res) => {
     try {
 
-        const id = req.param.id;
+        const id = req.params.id;
         const {nombre, precio, descripcion, categoria, cantidad} = req.body;
 
         const product = await Productos.findByPk(id);
@@ -134,10 +135,16 @@ const actualizarProducto = async (req, res) => {
 const eliminarProducto = async (req, res) => {
     try {
         
-        const id = req.param.id;
+        const id = req.params.id;
         await Productos.destroy({
             where: {
-                id: id
+              id: id
+            }
+        });
+
+        await Item_factura.destroy({
+            where: {
+                id_producto: id
             }
         })
 

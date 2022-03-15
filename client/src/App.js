@@ -8,6 +8,7 @@ import { Facturacion } from './Components/Facturacion';
 import Login from './Components/Login/Login'
 import Home from './Components/Home/Home'
 import Register from './Components/Register/Register'
+import Inventario from './Components/Inventario/index'
 
 /* State - Context */
 import FacturarionState from "./Context/Facturacion/FacturacionState";
@@ -26,6 +27,8 @@ function App() {
             <Route path='/login' element={<Login/>}/>
             <Route path='/register' element={<Register/>}/>
             <Route path='/dashboard' element={<Home/>}/>
+            <Route path='/productos' element={<Inventario/>}/>
+            <Route path='/inventario' element={<Inventario/>}/>
             <Route path='/facturacion' element={<Facturacion/>}/>
             <Route path='/margenventas' element={<MargenSales/>}/>
           </Routes>
