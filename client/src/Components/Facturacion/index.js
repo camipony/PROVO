@@ -10,12 +10,16 @@ import '../../Styles/Facturacion/Facturacion.css'
 import CrearFacturas from './CrearFacturas';
 import VerFacturas from './VerFacturas';
 import UserContext from '../../Context/User/UserContext';
+import FacturacionContext from '../../Context/Facturacion/FacturacionContext';
 
 export const Facturacion = () => {
 
     let [creadoFactura, setCreadoFactura] = useState(false);
     const userContext = useContext(UserContext);
-    const {usuarioAutenticado, verificarAutenticada} = userContext;
+    const {usuarioAutenticado, verificarAutenticada, datoUsuario} = userContext;
+
+    const facturacionContext = useContext(FacturacionContext);
+    const {loading, facturas, obtenerFacturas, obtenerFacturaActiva} = facturacionContext
 
     const navigate = useNavigate();
     
@@ -26,6 +30,8 @@ export const Facturacion = () => {
 
 		if(dato || usuarioAutenticado){
 			verificarAutenticada();
+            obtenerFacturas(dato.id);
+            obtenerFacturaActiva(dato.id)
 		}
         else{
             Swal.fire({
@@ -41,6 +47,12 @@ export const Facturacion = () => {
         }
 
 	}, [])
+
+    useEffect(() => {
+        if(datoUsuario !== null){
+            obtenerFacturas(datoUsuario.id);
+        }        
+    })
 
     const activeGenereFactura = () => {
         setCreadoFactura(creadoFactura = !creadoFactura);
@@ -76,7 +88,11 @@ export const Facturacion = () => {
                     </div>
                 </div>
                 <div className='cuerpoHF'>
-                    <VerFacturas />
+                    {loading 
+                        ? <div className='loading'>...loading</div>
+                        : <VerFacturas facturas = {facturas} />
+                    }
+                    
                     <div className='BtnFacturaActiva'>
                         <button onClick={activeGenereFactura}>
                             <ion-icon name="reader-outline"></ion-icon>

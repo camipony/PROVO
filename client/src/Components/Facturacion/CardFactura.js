@@ -14,7 +14,7 @@ export default function CardFactura(props) {
 
     const activeModal = () => {
         if( isOpenModal ){
-            return <ModalCard closeOrOpenModal = {closeOrOpenModal} />
+            return <ModalCard closeOrOpenModal = {closeOrOpenModal} dato = {props.dato} />
         }
         else{
             return <></>
@@ -23,16 +23,16 @@ export default function CardFactura(props) {
 
     return <div className='cardFactura'>
         <div className='headCard'>
-            <h1>00000001</h1>
+            <h1>{props.dato.id}</h1>
         </div>
         <div className='bodyCard'>
             <div>
-                <p style={{fontWeight: '600'}}>fecha:</p>
-                <p style={{fontWeight: '700'}}> 00/00/0000</p>
+                <p style={{fontWeight: '500', fontSize: '13px'}}>fecha:</p>
+                <p style={{fontWeight: '600', fontSize: '15px'}}>{props.dato.fecha_creacion}</p>
             </div>
         </div>
         <div className='footerCard'>
-            <p>$230000</p>
+            <p>{props.dato.total_a_pagar}</p>
             <button onClick={() => closeOrOpenModal()}>
                 <ion-icon name="open-outline"></ion-icon>
             </button>
@@ -41,22 +41,20 @@ export default function CardFactura(props) {
     </div>;
 }
 
-const list = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]
-
 function ModalCard(props){
 
     return <div className='ModalContainer'>
         <div className='modalVent'>
             <div className='contTop'>
-                <h1>00000001</h1>
+                <h1>{props.dato.id}</h1>
                 <button onClick={props.closeOrOpenModal}>
                     <ion-icon name="close-outline"></ion-icon>
                 </button>
             </div>
             <div className='contCenter'>
                 <div className='contTopCenter'>
-                    <h3>Fecha: 00/00/0000</h3>
-                    <h3>Total Productos: 100</h3>
+                    <p>{'Fecha: ' + props.dato.fecha_creacion}</p>
+                    <p>{'Total Productos: ' + props.dato.total_productos}</p>
                 </div>
                 <div className='contListDatos'>
                     <div className='headList'>
@@ -69,19 +67,19 @@ function ModalCard(props){
                         
                     </div>
                     <div className='bodyList'>
-                        {list.map(() => {
-                            return <div className='trData' key={list}>
-                                <p className='idProducto'>ID</p>
-                                <p className='nameProducto'>Producto</p>
-                                <p className='cantidadProducto'>Cantidad</p>
-                                <p className='precioProducto'>Precio</p>
+                        {props.dato.item.map( item => {
+                            return <div className='trData' key={item.id}>
+                                <p className='idProducto'>{item.id}</p>
+                                <p className='nameProducto'>{item.nombre}</p>
+                                <p className='cantidadProducto'>{item.cantidad_producto}</p>
+                                <p className='precioProducto'>{item.precio}</p>
                             </div>
                         })}
                     </div>
                 </div>
             </div>
             <div className='contBottom'>
-                <h1>$233486</h1>
+                <h1>{props.dato.total_a_pagar}</h1>
             </div>
         </div>
     </div>

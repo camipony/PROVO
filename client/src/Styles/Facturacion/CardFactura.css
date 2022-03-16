@@ -150,6 +150,11 @@
     border-bottom: 1px solid red;
 }
 
+.ModalContainer .modalVent .contCenter .contTopCenter p{
+    font-size: 16px;
+    margin: 0;
+}
+
 .ModalContainer .modalVent .contCenter .contListDatos{
     position: relative;
     width: 100%;

@@ -1,4 +1,5 @@
 import React, {useReducer} from 'react'
+import axios from 'axios'
 
 import FacturacionContext from './FacturacionContext'
 import FacturacionReducer from './FacturacionReducer'
@@ -6,26 +7,25 @@ import FacturacionReducer from './FacturacionReducer'
 const FacturarionState = (props) => {
     const inicialState = {
         facturas: [],
-        productoFactura: [],
+        dtfacturaActiva: [],
+        loadingActive: false,
         facturaActiva: false,
-        error: false,
         loading: false
     }
 
     const [state, dispatch] = useReducer(FacturacionReducer, inicialState)
 
-    const obtenerFacturas = (idUsuario) => {
+    const obtenerFacturas = async (idUsuario) => {
         try {
+
+            const res = await axios.get('https://provo-backend.herokuapp.com/historia-facturas/'+idUsuario);
+
             dispatch({
                 type: 'OBTENER_FACTURAS',
-                payload: idUsuario
+                payload: res.data
             })
         } catch (error) {
             console.log(error);
-            dispatch({
-                type: 'ERROR_FACTURAS',
-                payload: true
-            })
         }
         finally{
             dispatch({
@@ -35,73 +35,80 @@ const FacturarionState = (props) => {
         }
     }
 
-    const obtenerFactura = (id) => {
+    const obtenerFacturaActiva = async (idUsuario) => {
         try {
+
+            const res = await axios.get('https://provo-backend.herokuapp.com/factura-activa/'+idUsuario);
+
             dispatch({
-                type: 'OBTENER_FACTURA',
-                payload: id
+                type: 'OBTENER_FACTURAS_ACTIVA',
+                payload: res.data
             })
+
         } catch (error) {
             console.log(error);
-            dispatch({
-                type: 'ERROR_FACTURAS',
-                payload: true
-            })
-        }
-        finally{
-            dispatch({
-                type: 'LOADING_FACTURAS',
-                payload: true
-            })
+        } finally {
+            state.loadingActive = false
         }
     }
 
-    const guardarFactura = () => {
+    const confirmarCompraFactura = async (id) => {
         try {
-            dispatch({
-                type: 'GUARDAR_FACTURA',
-                payload: []
+
+            await axios.post('https://provo-backend.herokuapp.com/facturas', {
+                id_usuario: id
             })
+
         } catch (error) {
             console.log(error);
         }
     }
 
-    const addProductoFactura = () => {
+    const addItemFactura = async (dato) => {
         try{
-            dispatch({
-                type: '',
-                payload: []
-            })
+            await axios.post('https://provo-backend.herokuapp.com/item-factura/', dato)
         } catch (error) {
             console.log(error);
         }
     }
 
-    const deleteProductoFactura = () => {
+    const deleteItemFactura = async (id) => {
         try{
-            dispatch({
-                type: '',
-                payload: []
-            })
+
+            await axios.delete('https://provo-backend.herokuapp.com/item-facturas/'+id);
+
         } catch (error) {
             console.log(error);
         }
     }
 
-    const updateProductoFactura = (newProduct) => {
+    const updateFactura = async (id, estadoFactura) => {
         try{
-            dispatch({
-                type: '',
-                payload: newProduct
-            })
+
+            await axios.put('https://provo-backend.herokuapp.com/facturas/'+id, estadoFactura);
+            
         } catch (error) {
             console.log(error);
         }
     }
 
-    const vaciarProductoFactura = () => {
+    const updateItemFactura = async (id, newProduct) => {
         try{
+
+            await axios.put('https://provo-backend.herokuapp.com/item-facturas/'+id, newProduct);
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const vaciarFactura = (items) => {
+        try{
+
+            items.map( async item => {
+                await axios.delete('https://provo-backend.herokuapp.com/item-facturas/'+item.id);
+            })
+
             dispatch({
                 type: '',
                 payload: []
@@ -114,17 +121,17 @@ const FacturarionState = (props) => {
     return (
         <FacturacionContext.Provider value={{
             facturas: state.facturas,
-            productoFactura: state.productoFactura,
+            dtfacturaActiva: state.dtfacturaActiva,
             facturaActiva: state.facturaActiva,
-            error: state.error,
             loading: state.loading,
             obtenerFacturas,
-            obtenerFactura,
-            addProductoFactura,
-            deleteProductoFactura,
-            updateProductoFactura,
-            guardarFactura,
-            vaciarProductoFactura
+            addItemFactura,
+            deleteItemFactura,
+            updateItemFactura,
+            updateFactura,
+            confirmarCompraFactura,
+            vaciarFactura,
+            obtenerFacturaActiva
         }} >
             {props.children}
         </FacturacionContext.Provider>

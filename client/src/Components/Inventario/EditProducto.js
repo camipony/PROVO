@@ -14,7 +14,7 @@ const EditProducto = (props) => {
         precio: props.todoprecio, 
         descripcion: props.tododescripcion, 
         categoria: props.todo.categoria, 
-        cantidad_exitente_producto: props.todo.cantidad
+        cantidad: props.todo.cantidad_exitente_producto
       };
       const response = await fetch(
         `https://provo-backend.herokuapp.com/productos/${props.todo.id}`,

@@ -269,7 +269,7 @@ export default function Home() {
 	const toFunction = (title) => {
 		console.log(title);
 		if(title === 'Inventario'){
-			navigate("/inventario");
+			navigate("/facturacion");
 		}else if(title === 'Productos'){
 			navigate("/productos");
 		}else if(title === 'Contabilidad'){

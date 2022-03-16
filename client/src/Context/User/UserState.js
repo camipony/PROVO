@@ -9,7 +9,7 @@ const UserState = (props) => {
     const inicialState = {
         usuarioAutenticado: false,
         cargando: false,
-        datoUsuario: {}
+        datoUsuario: null
     }
 
     const [state, dispatch] = useReducer(UserReducer, inicialState);
@@ -48,7 +48,7 @@ const UserState = (props) => {
         try{
 
             const res = await axios.post('https://provo-backend.herokuapp.com/autenticar-usuario/', dato); 
-            console.log(res.data[0])
+            
             if( res.data.length > 0 ){
 
                 state.usuarioAutenticado = true;

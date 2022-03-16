@@ -16,7 +16,7 @@ const InputProducto = () => {
         precio: 1000, 
         descripcion: '', 
         categoria: '', 
-        cantidad_exitente_producto: 1
+        cantidad: 1
       };
       console.log(body)
       const response = await fetch("https://provo-backend.herokuapp.com/productos/", {

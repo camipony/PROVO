@@ -11,6 +11,28 @@ const getFacturas  = async (req, res) => {
         const productos = await Productos.findAll();
 
         const jsonFile = response.map( factura => {
+
+            let itemData = [];
+
+            for( let i = 0; i < itemResponse.length; i++ ){
+                for( let j = 0; j < productos.length; j++ ){
+                    if( itemResponse[i].id_factura === factura.id && itemResponse[i].id_producto === productos[j].id ){
+                        const dato = {
+                            id: itemResponse[i].id,
+                            id_factura: itemResponse[i].id_factura,
+                            id_producto: itemResponse[i].id_producto,
+                            nombre: productos[j].nombre,
+                            precio: productos[j].precio,
+                            descripcion: productos[j].descripcion,
+                            categoria: productos[j].categoria,
+                            cantidad_producto: itemResponse[i].cantidad_producto,                                    
+                            cantidad_exitente_producto: productos[j].cantidad_exitente_producto
+                        }
+                        itemData.push(dato);
+                    }
+                }
+            }
+
             return {
                 id: factura.id,
                 id_usuario: factura.id_usuario,
@@ -18,25 +40,7 @@ const getFacturas  = async (req, res) => {
                 total_productos: factura.total_productos,
                 fecha_creacion: factura.fecha_creacion,
                 activa: factura.activa,
-                item: itemResponse.map( itemdata => {
-                    if( itemdata.id_factura == factura.id ){
-                        productos.map( product => {
-                            if( itemdata.id_producto === product.id ){
-                                return {
-                                    id: itemdata.id,
-                                    id_factura: itemdata.id_factura,
-                                    id_producto: itemdata.id_producto,
-                                    nombre: product.name_product,
-                                    precio: product.precio,
-                                    descripcion: product.descripcion,
-                                    categoria: product.categoria,
-                                    cantidad_producto: itemdata.cantidad_producto,
-                                    cantidad_exitente_producto: product.cantidad_exitente_producto
-                                }
-                            }
-                        } )
-                    }                    
-                } )
+                item: itemData
             }
         } )
 
@@ -64,6 +68,27 @@ const getFactura = async (req, res) => {
         })
         const productos = await Productos.findAll();
 
+        const itemData = [];
+
+        for( let i = 0; i < itemResponse.length; i++ ){
+            for( let j = 0; j < productos.length; j++ ){
+                if( itemResponse[i].id_producto === productos[j].id ){
+                    const dato = {
+                        id: itemResponse[i].id,
+                        id_factura: itemResponse[i].id_factura,
+                        id_producto: itemResponse[i].id_producto,
+                        nombre: productos[j].nombre,
+                        precio: productos[j].precio,
+                        descripcion: productos[j].descripcion,
+                        categoria: productos[j].categoria,
+                        cantidad_producto: itemResponse[i].cantidad_producto,                                    
+                        cantidad_exitente_producto: productos[j].cantidad_exitente_producto
+                    }
+                    itemData.push(dato);
+                }
+            }
+        }
+
         const jsonFile = {
             id: response.id,
             id_usuario: response.id_usuario,
@@ -71,22 +96,7 @@ const getFactura = async (req, res) => {
             total_productos: response.total_productos,
             fecha_creacion: response.fecha_creacion,
             activa: response.activa,
-            item: itemResponse.map( itemdata => {
-                productos.map( product => {
-                    if( itemdata.id_producto === product.id ){
-                        return {
-                            id: itemdata.id,
-                            id_factura: itemdata.id_factura,
-                            id_producto: itemdata.id_producto,
-                            nombre: product.name_product,
-                            precio: product.precio,
-                            descripcion: product.descripcion,
-                            categoria: product.categoria,
-                            cantidad_producto: itemdata.cantidad_producto
-                        }
-                    }
-                } )                    
-            } )
+            item: itemData
         }
 
         res.json(jsonFile);
@@ -118,6 +128,28 @@ const getUserFactura = async (req, res) => {
         })
 
         const jsonFile = response.map( factura => {
+
+            let itemData = [];
+
+            for( let i = 0; i < itemResponse.length; i++ ){
+                for( let j = 0; j < productos.length; j++ ){
+                    if( itemResponse[i].id_factura === factura.id && itemResponse[i].id_producto === productos[j].id ){
+                        const dato = {
+                            id: itemResponse[i].id,
+                            id_factura: itemResponse[i].id_factura,
+                            id_producto: itemResponse[i].id_producto,
+                            nombre: productos[j].nombre,
+                            precio: productos[j].precio,
+                            descripcion: productos[j].descripcion,
+                            categoria: productos[j].categoria,
+                            cantidad_producto: itemResponse[i].cantidad_producto,                                    
+                            cantidad_exitente_producto: productos[j].cantidad_exitente_producto
+                        }
+                        itemData.push(dato);
+                    }
+                }
+            }
+
             return {
                 id: factura.id,
                 id_usuario: factura.id_usuario,
@@ -125,24 +157,7 @@ const getUserFactura = async (req, res) => {
                 total_productos: factura.total_productos,
                 fecha_creacion: factura.fecha_creacion,
                 activa: factura.activa,
-                item: itemResponse.map( itemdata => {
-                    if( itemdata.id_factura == factura.id ){
-                        productos.map( product => {
-                            if( itemdata.id_producto === product.id ){
-                                return {
-                                    id: itemdata.id,
-                                    id_factura: itemdata.id_factura,
-                                    id_producto: itemdata.id_producto,
-                                    nombre: product.name_product,
-                                    precio: product.precio,
-                                    descripcion: product.descripcion,
-                                    categoria: product.categoria,
-                                    cantidad_producto: itemdata.cantidad_producto
-                                }
-                            }
-                        } )
-                    }                    
-                } )
+                item: itemData
             }
         } )
 
@@ -176,6 +191,28 @@ const getUserHistoryFactura = async (req, res) => {
         })
 
         const jsonFile = response.map( factura => {
+
+            let itemData = [];
+
+            for( let i = 0; i < itemResponse.length; i++ ){
+                for( let j = 0; j < productos.length; j++ ){
+                    if( itemResponse[i].id_factura === factura.id && itemResponse[i].id_producto === productos[j].id ){
+                        const dato = {
+                            id: itemResponse[i].id,
+                            id_factura: itemResponse[i].id_factura,
+                            id_producto: itemResponse[i].id_producto,
+                            nombre: productos[j].nombre,
+                            precio: productos[j].precio,
+                            descripcion: productos[j].descripcion,
+                            categoria: productos[j].categoria,
+                            cantidad_producto: itemResponse[i].cantidad_producto,                                    
+                            cantidad_exitente_producto: productos[j].cantidad_exitente_producto
+                        }
+                        itemData.push(dato);
+                    }
+                }
+            }
+
             return {
                 id: factura.id,
                 id_usuario: factura.id_usuario,
@@ -183,24 +220,7 @@ const getUserHistoryFactura = async (req, res) => {
                 total_productos: factura.total_productos,
                 fecha_creacion: factura.fecha_creacion,
                 activa: factura.activa,
-                item: itemResponse.map( itemdata => {
-                    if( itemdata.id_factura == factura.id ){
-                        productos.map( product => {
-                            if( itemdata.id_producto === product.id ){
-                                return {
-                                    id: itemdata.id,
-                                    id_factura: itemdata.id_factura,
-                                    id_producto: itemdata.id_producto,
-                                    nombre: product.name_product,
-                                    precio: product.precio,
-                                    descripcion: product.descripcion,
-                                    categoria: product.categoria,
-                                    cantidad_producto: itemdata.cantidad_producto
-                                }
-                            }
-                        } )
-                    }                    
-                } )
+                item: itemData
             }
         } )
 
@@ -302,7 +322,7 @@ const addItemFactura = async (req, res) => {
 const actualizarFactura = async (req, res) => {
     try {
         
-        const id = res.params.id;
+        const id = req.params.id;
         const {activa} = req.body;
 
         const itemFactura = await Item_factura.findAll({
@@ -324,6 +344,7 @@ const actualizarFactura = async (req, res) => {
         } )
 
         const facturas = await Facturas.findByPk(id);
+
         facturas.update({
             total_a_pagar: totalPago, 
             total_productos: itemFactura.length, 
@@ -350,7 +371,7 @@ const actualizarFactura = async (req, res) => {
             message : 'Se actualizo la factura',
             body : {
                 dato : {
-                    id_usuario: id_usuario, 
+                    id_usuario: facturas.id_usuario, 
                     total_a_pagar: totalPago, 
                     total_productos: itemFactura.length, 
                     activa: activa
@@ -371,14 +392,13 @@ const actualizarFactura = async (req, res) => {
 const actualizarItemFactura = async (req, res) => {
     try {
         
-        const id = res.params.id;
+        const id = req.params.id;
         const {cantidad_producto} = req.body;
+        console.log(id)
 
-        await Item_factura.update({ cantidad_producto: cantidad_producto }, {
-            where:{
-                id:id
-            }
-        })
+        const item = await Item_factura.findByPk(id)
+
+        item.update({ cantidad_producto: cantidad_producto })
 
         res.json({
             message : 'Se actualizo el producto de la factura',
