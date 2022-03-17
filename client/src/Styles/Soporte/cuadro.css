@@ -1,0 +1,19 @@
+.hide{
+  display: none;
+}
+
+.cuadro:hover {
+  box-shadow: 5px 10px 20px 5px rgba(250, 248, 248, 0.952) !important;
+  transition: all 0.7s linear;
+}
+.overflow {
+  overflow: hidden;
+}
+.card-img-top {
+  transform: scale(1);
+  transition: all 0.2s ease-in-out;
+}
+
+.card-img-top:hover {
+  transform: scale(1.5);
+}
