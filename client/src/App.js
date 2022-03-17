@@ -1,24 +1,24 @@
 import React from "react";
-import './Styles/App.css';
 import {BrowserRouter as Router,Route, Routes} from "react-router-dom";
 
 /* Componentes */
-import { MargenSales } from './Components/MargenSales';
-import { Facturacion } from './Components/Facturacion';
+import { MargenSales } from './Components/MargenSales/Margen';
+import { Facturacion } from './Components/Facturacion/Facturacion';
 import Login from './Components/Login/Login'
 import Home from './Components/Home/Home'
 import Register from './Components/Register/Register'
-import Inventario from './Components/Inventario/index'
-import Soporte from './Components/Soporte/cuadros'
+import Inventario from './Components/Inventario/Inventario'
+import Soporte from './Components/Soporte/Soporte'
 /* State - Context */
 import FacturarionState from "./Context/Facturacion/FacturacionState";
 import UserState from "./Context/User/UserState";
+
+import './Styles/App.css';
 
 /*  */
 
 function App() {
   return <div className="App">
-    
     <FacturarionState>
       <UserState>
         <Router>
@@ -31,7 +31,7 @@ function App() {
             <Route path='/inventario' element={<Inventario/>}/>
             <Route path='/facturacion' element={<Facturacion/>}/>
             <Route path='/margenventas' element={<MargenSales/>}/>
-            <Route path='/Ayuda' element={<Soporte/>}/>
+            <Route path='/ayuda' element={<Soporte/>}/>
           </Routes>
         </Router>
       </UserState>        

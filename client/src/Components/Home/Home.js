@@ -1,7 +1,6 @@
-
+/*Libraries used */
 import { styled, useTheme } from '@mui/material/styles';
 import React, { useState, useContext, useEffect } from 'react';
-import {Card} from '../Login/Card'
 import ListItemButton from '@mui/material/ListItemButton';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
@@ -28,12 +27,15 @@ import products from '../../assets/products.png';
 import sales from '../../assets/sales.png';
 import support from '../../assets/support.png';
 import Swal from 'sweetalert2';
+import { Helmet } from 'react-helmet'
 import '../../Styles/Home/home.css';
+
 /* Context */
 import UserContext from '../../Context/User/UserContext';
 import { useNavigate } from "react-router-dom";
 
-window.document.title = 'Home -> Dashboard';
+/** Constants */
+const TITLE = 'Principal'
 const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({
@@ -240,11 +242,6 @@ export default function Home() {
 		},
 	];
 
-	const onSubmit = () => {
-		//xconsole.log(body)
-
-	}
-
 	const buttons = (type) =>{
 		
 		if(type === 'Perfil'){
@@ -256,15 +253,44 @@ export default function Home() {
 			})
 		}
 		if(type === 'Cerrar sesión'){
-			cerrarSecion();
-			navigate("/login");
+			Swal.fire({
+				title: 'Cerrando sesion',
+				timer: 2000,
+				timerProgressBar: true,
+				didOpen: () => {
+					Swal.showLoading()
+				}
+			}).then(() => {
+				cerrarSecion();
+				navigate("/login");
+			});
 		}
 
 		if(type === 'Sobre PROVO.'){
-			navigate("/ayuda");
+			Swal.fire({
+				title: 'Ingresando a soporte al cliente',
+				timer: 1000,
+				timerProgressBar: true,
+				didOpen: () => {
+					Swal.showLoading()
+				}
+			}).then(() => {
+				navigate("/ayuda");
+			});
+
 		}
 		if(type === 'Modulos'){
-			navigate("/dashboard");
+			Swal.fire({
+				title: 'Redirigiendo a modulos del programa',
+				timer: 1000,
+				timerProgressBar: true,
+				didOpen: () => {
+					Swal.showLoading()
+				}
+			}).then(() => {
+				navigate("/dashboard");
+			});
+
 		}
 	}
 
@@ -292,6 +318,7 @@ export default function Home() {
 
 	return (
 		<Box sx={{ display: 'flex' }}>
+			<Helmet><title>{TITLE}</title> </Helmet>
 			<CssBaseline />
 			<AppBar position="fixed" open={open} style={{ background: '#FFFFFF' }}>
 				<Toolbar >

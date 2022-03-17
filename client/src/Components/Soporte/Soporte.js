@@ -1,43 +1,11 @@
-//import React from 'react'
-import Cuadro from './cuadro'
-import "../../Styles/Soporte/cuadro.css"
+import React, { useContext} from "react";
+import { styled, useTheme } from "@mui/material/styles";
 import usuario1 from "../../assets/imagen/usuario1.png"
 import inicio from '../../assets/imagen/inicio1.jpg'
 import codigobarra1 from '../../assets/imagen/codigobarra1.png'
 import inventario from '../../assets/imagen/inventario.jpg'
 import producto1 from '../../assets/imagen/producto1.jpg'
 import eliminar1 from '../../assets/imagen/eliminar1.png'
-
-/*
-contiene la informacion de ada cuadro
-
-
-/**
- * Function Cuadros muestra los cuadros en pantalla
- * return imagen del cuadro, titulo del cuadro, texto del cuadro y boton del cuadro
- */
-/*
-
-export default function Cuadros() {
-  return (
-    
-  )
-}
-*/
-
-import React, { Component, useState, useContext, useEffect } from "react";
-import "../../Styles/Inventario/inventario.css";
-import "../../Styles/Inventario/App.css";
-//import "../../Components/Inventario/funcion.js";
-import casa from "../../assets/casa.png";
-import provo2 from "../../assets/provo2.png";
-// import { AiOutlineHome } from 'react-icons/ai';
-import "../../Styles/Inventario/mediaProductos.css";
-
-import Container from "@mui/material/Container";
-import { styled, useTheme } from "@mui/material/styles";
-import Link from "@mui/material/Link";
-import { Card } from "../Login/Card";
 import ListItemButton from "@mui/material/ListItemButton";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
@@ -57,16 +25,24 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import ButtonBase from "@mui/material/ButtonBase";
 import { makeStyles } from "@material-ui/core/styles";
-import support from "../../assets/support.png";
 import Swal from "sweetalert2";
-import "../../Styles/Home/home.css";
+import { Helmet } from 'react-helmet'
+import Cuadro from './cuadro';
+
+/*Styles */
+
+import "../../Styles/Soporte/cuadro.css";
+import "../../Styles/Inventario/inventario.css";
+import "../../Styles/Inventario/App.css";
+import "../../Styles/Inventario/mediaProductos.css";
+
 /* Context */
 import UserContext from "../../Context/User/UserContext";
 import { useNavigate } from "react-router-dom";
 
-window.document.title = "Home -> Dashboard";
+/* Constantes */
+const TITLE = 'Soporte'
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -79,26 +55,6 @@ const useStyles = makeStyles((theme) => ({
   typography: {
     color: "#606060",
     fontFamily: "Open Sans Condensed",
-  },
-}));
-
-const ImageButton = styled(ButtonBase)(({ theme }) => ({
-  position: "relative",
-  height: 190,
-  [theme.breakpoints.down("sm")]: {
-    width: "80% !important", // Overrides inline-style
-  },
-  "&:hover, &.Mui-focusVisible": {
-    zIndex: 1,
-    "& .MuiImageBackdrop-root": {
-      opacity: 0.15,
-    },
-    "& .MuiImageMarked-root": {
-      opacity: 0,
-    },
-    "& .MuiTypography-root": {
-      border: "2px solid currentColor",
-    },
   },
 }));
 
@@ -166,60 +122,6 @@ const Drawer = styled(MuiDrawer, {
     "& .MuiDrawer-paper": closedMixin(theme),
   }),
 }));
-const ImageSrc = styled("span")({
-  position: "absolute",
-  left: 0,
-  right: 0,
-  top: 0,
-  bottom: 0,
-  backgroundSize: "length",
-  backgroundPosition: "center 50%",
-});
-
-const Image = styled("span")(({ theme }) => ({
-  position: "absolute",
-  left: 0,
-  right: 0,
-  top: 0,
-  bottom: 0,
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  color: theme.palette.common.white,
-}));
-
-const ImageBackdrop = styled("span")(({ theme }) => ({
-  position: "absolute",
-  left: 0,
-  right: 0,
-  top: 0,
-  bottom: 0,
-  backgroundColor: theme.palette.common.black,
-  opacity: 0.5,
-  transition: theme.transitions.create("opacity"),
-}));
-
-const ImageMarked = styled("span")(({ theme }) => ({
-  height: 3,
-  width: 18,
-  backgroundColor: theme.palette.common.white,
-  bottom: -2,
-  left: "calc(50% - 9px)",
-  transition: theme.transitions.create("opacity"),
-}));
-
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="common.white" align="center" {...props}>
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Attendance
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
 
 export default function Cuadros() {
   const theme = useTheme();
@@ -235,26 +137,57 @@ export default function Cuadros() {
   const classes = useStyles();
 
 
-  const buttons = (type) => {
-    if (type === "Perfil") {
-      Swal.fire({
-        icon: "success",
-        title: "Nombre " + datoUsuario.nombre,
-        showConfirmButton: false,
-        timer: 3000,
-      });
-    }
-    if (type === "Cerrar sesión") {
-      cerrarSecion();
-      navigate("/login");
-    }
-    if (type === "Modulos") {
-      console.log("Modulos");
-      navigate("/dashboard");
-    }
-  };
+	const buttons = (type) =>{
+		
+		if(type === 'Perfil'){
+			Swal.fire({
+				icon: 'success',
+				title: 'Nombre '+ datoUsuario.nombre,
+				showConfirmButton: false,
+				timer: 3000,
+			})
+		}
+		if(type === 'Cerrar sesión'){
+			Swal.fire({
+				title: 'Cerrando sesion',
+				timer: 2000,
+				timerProgressBar: true,
+				didOpen: () => {
+					Swal.showLoading()
+				}
+			}).then(() => {
+				cerrarSecion();
+				navigate("/login");
+			});
+		}
 
+		if(type === 'Sobre PROVO.'){
+			Swal.fire({
+				title: 'Ingresando a soporte al cliente',
+				timer: 1000,
+				timerProgressBar: true,
+				didOpen: () => {
+					Swal.showLoading()
+				}
+			}).then(() => {
+				navigate("/ayuda");
+			});
 
+		}
+		if(type === 'Modulos'){
+			Swal.fire({
+				title: 'Redirigiendo a modulos del programa',
+				timer: 1000,
+				timerProgressBar: true,
+				didOpen: () => {
+					Swal.showLoading()
+				}
+			}).then(() => {
+				navigate("/dashboard");
+			});
+
+		}
+	}
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -264,42 +197,36 @@ export default function Cuadros() {
     setOpen(false);
   };
 
-
   const cuadros = [
     {
       id: 1,
-      title: "controlar mi inventario",
+      title: "Controlar mi inventario",
       image: inventario,
       text: "Para controlar tu inventario, solo debes llevar un orden de tus productos, la cantidad que ingresa, la cantidad que se vende, tambien teniendo en cuenta los precios de costo y los precios de venta. Revisar la cantidad en fisico y la cantidad virtual.",
       boton: "Leer mas...",
       funci: function(){  
         document.getElementById("hideText").style.display = "block";
-        
       }
-      
     },
     {
       id: 2,
-      title: "¿Como agregar un producto nuevo?",
+      title: "¿Agregar un producto nuevo?",
       image: producto1,
+      height: 10,
       text: "Tienes que dirigirte a inventarios y dale a la opcion añadir articulos, debes colocar el nombre, el precio, una descripcion que es opcional y guardarlo, ya esta listo para que puedas facturar el nuevo producto.",
       boton: "Leer mas...",
       funci: function(){
         document.getElementById("hideText").style.display= "none";
-        
       }
     },
     {
       id:3,
-      title: "¿como crear mi usuario?",
+      title: "¿Como crear mi usuario?",
       image: usuario1,
       text: "Para crear un nuevo usuario debes registrate con un correo y una contraseña, se recomienda que sea privada y no compartirla.",
       boton: "Leer mas...",
       funci: function(){
-        
         document.getElementById("hideText").style.display = "block";
-        
-        
       }
     },
     {
@@ -322,13 +249,12 @@ export default function Cuadros() {
       image: inicio,
       boton: "Inicio"
     }
-  
   ]
 
 
   return (
-    
     <Box sx={{ display: 'flex' }}>
+      <Helmet><title>{TITLE}</title> </Helmet>
 			<CssBaseline />
 			<AppBar position="fixed" open={open} style={{ background: '#FFFFFF' }}>
 				<Toolbar >
@@ -345,7 +271,7 @@ export default function Cuadros() {
 						<MenuIcon />
 					</IconButton>
 					<Typography variant="h5" noWrap component="div" className={classes.typography}>
-						Interfaz principal
+						Soporte al cliente
 					</Typography>
 				</Toolbar>
 			</AppBar>
@@ -366,7 +292,7 @@ export default function Cuadros() {
 					</ListItemIcon>
 					<ListItemText primary="Modulos" />
 				</ListItemButton>
-				<ListItemButton>
+				<ListItemButton onClick={() => buttons('Sobre PROVO.')}>
 					<ListItemIcon>
 					<ContactSupportIcon />
 					</ListItemIcon>

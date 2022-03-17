@@ -5,11 +5,14 @@ import Box from '@mui/material/Box';
 import axios from 'axios'
 import '../../Styles/Login/login.css';
 import { useNavigate } from "react-router-dom";
+import { Helmet } from 'react-helmet'
 import Swal from 'sweetalert2';
+
 
 /* Context */
 import UserContext from '../../Context/User/UserContext';
 
+const TITLE = 'Ingresar'
 const useStyles = makeStyles(theme => ({
 	root: {
 		backgroundRepeat: 'no-repeat',
@@ -51,11 +54,10 @@ const useStyles = makeStyles(theme => ({
 const Login = () => {
 
 	const userContext = useContext(UserContext);
-  	const {darDatos, verificarAutenticada, datoUsuario} = userContext;
+  	const {darDatos, verificarAutenticada} = userContext;
 
 	const navigate = useNavigate();
 
-	window.document.title = 'Login';
 	const [body, setBody] = useState({ usuario: '', password: '' })
 	const classes = useStyles()
 
@@ -146,7 +148,9 @@ const Login = () => {
 	};
 
 	return (
+		
 		<Grid container component='main' className={classes.root} >
+			<Helmet><title>{TITLE}</title> </Helmet>
 			<CssBaseline />
 			<Container maxWidth='xs' className={classes.container}>
 				<div className="efect">

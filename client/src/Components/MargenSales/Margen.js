@@ -24,10 +24,10 @@ import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
 
 /* Imagenes */
-import grafica1 from '../../assets/g1.png'
+import grafica1 from '../../assets/g1.jpg'
 import grafica2 from '../../assets/g2.png'
 import grafica3 from '../../assets/g3.png'
-import grafica4 from '../../assets/g4.webp'
+import grafica4 from '../../assets/g4.jpg'
 import grafica5 from '../../assets/g5.png'
 import grafica6 from '../../assets/g6.png'
 
@@ -156,12 +156,6 @@ export const MargenSales = () => {
 
 	}, [])
 	
-	const handleSubmit = async (e) =>{
-		//setBody({...body,[e.target.name]: e.target.value});
-		//console.log("handleChange"+ body);
-		buttons('Perfil');
-        
-    };
 
 	const buttons = (type) =>{
 		
@@ -174,12 +168,45 @@ export const MargenSales = () => {
 			})
 		}
 		if(type === 'Cerrar sesión'){
-			cerrarSecion();
-			navigate("/login");
+			Swal.fire({
+				title: 'Cerrando sesion',
+				timer: 2000,
+				timerProgressBar: true,
+				didOpen: () => {
+					Swal.showLoading()
+				}
+			}).then(() => {
+				cerrarSecion();
+				navigate("/login");
+			});
 		}
-        if(type === 'modulos'){
-            navigate("/dashboard");
-        }
+
+		if(type === 'Sobre PROVO.'){
+			Swal.fire({
+				title: 'Ingresando a soporte al cliente',
+				timer: 1000,
+				timerProgressBar: true,
+				didOpen: () => {
+					Swal.showLoading()
+				}
+			}).then(() => {
+				navigate("/ayuda");
+			});
+
+		}
+		if(type === 'Modulos'){
+			Swal.fire({
+				title: 'Redirigiendo a modulos del programa',
+				timer: 1000,
+				timerProgressBar: true,
+				didOpen: () => {
+					Swal.showLoading()
+				}
+			}).then(() => {
+				navigate("/dashboard");
+			});
+
+		}
 	}
 
 	const handleDrawerOpen = () => {
@@ -207,7 +234,7 @@ export const MargenSales = () => {
           <MenuIcon />
         </IconButton>
         <Typography variant="h5" noWrap component="div" className={classes.typography}>
-          Interfaz principal
+          Margen de ventas
         </Typography>
       </Toolbar>
     </AppBar>
@@ -219,16 +246,16 @@ export const MargenSales = () => {
       </DrawerHeader>
       <Divider />
       <List>
-        <ListItemButton onClick={(e) => handleSubmit(e)}>
+        <ListItemButton onClick={() => buttons('Perfil')}>
           <ListItemIcon><AccountCircleIcon /></ListItemIcon>
           <ListItemText primary="Perfil" /></ListItemButton>
-      <ListItemButton onClick={() => buttons('modulos')}>
+      <ListItemButton onClick={() => buttons('Modulos')}>
         <ListItemIcon>
         <ViewListIcon />
         </ListItemIcon>
         <ListItemText primary="Modulos" />
       </ListItemButton>
-      <ListItemButton>
+      <ListItemButton onClick={() => buttons('Sobre PROVO.')}>
         <ListItemIcon>
         <ContactSupportIcon />
         </ListItemIcon>
@@ -248,31 +275,24 @@ export const MargenSales = () => {
         <div className='BodyMS'>
           <div className='headerMS'>
             <div className='contTitle'>
-              <h1>SALES MARGIN</h1>
-            </div>
-            <div className='icon'>
-              <img src='https://www.latercera.com/resizer/EFm8se8COcJZjqcvfvUkJ2PuOOk=/900x600/smart/arc-anglerfish-arc2-prod-copesa.s3.amazonaws.com/public/VAPOYBTRO5GF7G4XJ2NIMNC6KA.jpg' alt='.../' ></img>
+              <h1>MARGEN DE VENTAS</h1>
             </div>
           </div>
           <div className='cuerpoMS' >
             <div className='GraficasSales'>
               <div className='ventasProduct'>
                 <img src={grafica1} alt='' />
-                <img src={grafica2} alt='' />
               </div>
               <div className='ventasDias'>
-                <img src={grafica3} alt='' />
+              <img src={grafica4}  alt='' />
               </div>
             </div>
             <div className='TotalVentas'>
-              <img src={grafica4} alt='' />
-              <img src={grafica3} alt='' />
+            <img src={grafica2}  alt='' />
             </div>
             <div className='infoInventario'>
-              <img src={grafica4} alt='' />
+            <img src={grafica3}  alt='' />
             </div>
-            <div className='Contfacturas'></div>
-            <div className='infoStore'></div>
           </div>
         </div>
       </div>;

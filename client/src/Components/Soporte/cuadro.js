@@ -1,18 +1,13 @@
+/*Libraries used */
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2';
+
+/* Styles*/
 import "../../Styles/Soporte/cuadro.css"
 
-/**
- * Function Cuadro es un cuadro que se dara a mostrar
- * @param key
- * @param title
- * @param imageSource
- * @param boton
- * @param text
- * @param funci
- * return cuadro completo
- */
-function Cuadro({id, key,title,imageSource,boton,text,funci}){
+
+function Cuadro({id, key,title, imageSource,boton,text}){
 
   const navigate = useNavigate();
 
@@ -20,7 +15,16 @@ function Cuadro({id, key,title,imageSource,boton,text,funci}){
 
   const activarMsDialogo = () => {
     if( id === 6 ){
-      navigate("/dashboard");
+      Swal.fire({
+				title: 'Volviendo a la interfaz principal',
+				timer: 2000,
+				timerProgressBar: true,
+				didOpen: () => {
+					Swal.showLoading()
+				}
+			}).then(() => {
+				navigate("/dashboard");
+			});
     }
     else{
       setActiveDialogo(!activeDialogo)
@@ -28,7 +32,6 @@ function Cuadro({id, key,title,imageSource,boton,text,funci}){
   }
   
   return(
-    
     <div className="cuadro text-center bg-dark animate__animated animate__fadeInUp"id = {key}>
       <div className= "overflow">
         <img src ={imageSource} alt="a wallpaper" className="card-img-top"/>

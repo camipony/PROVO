@@ -1,4 +1,4 @@
-/* eslint-disable jsx-a11y/alt-text */
+/*Libraries used */
 import React, { useState, useContext, useEffect } from 'react'
 import { styled, useTheme } from '@mui/material/styles';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -22,17 +22,23 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { makeStyles } from '@material-ui/core/styles';
 import { useNavigate } from "react-router-dom";
+import { Helmet } from 'react-helmet'
 import Swal from 'sweetalert2';
 
-//import '../../Styles/Facturacion/facturacionStyle.css'
-import '../../Styles/Facturacion/Facturacion.css'
-//import '../../Styles/Facturacion/mediaFacturacion.css'
-
+/* Funciones */
 import CrearFacturas from './CrearFacturas';
 import VerFacturas from './VerFacturas';
+
+/* Context */
 import UserContext from '../../Context/User/UserContext';
 import FacturacionContext from '../../Context/Facturacion/FacturacionContext';
 
+/* Styles */
+import '../../Styles/Facturacion/Facturacion.css';
+
+/* Constantes */
+
+const TITLE = 'Facturacion'
 const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({
@@ -45,7 +51,6 @@ const useStyles = makeStyles(theme => ({
 	typography: {
 		color: "#606060",
 		fontFamily: 'Open Sans Condensed',
-
 	  }
 	  
 }));
@@ -76,7 +81,6 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 	alignItems: 'center',
 	justifyContent: 'flex-end',
 	padding: theme.spacing(0, 1),
-	// necessary for content to be below app bar
 	...theme.mixins.toolbar,
 }));
 
@@ -118,22 +122,16 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 export const Facturacion = () => {
 
 	const navigate = useNavigate();
-
     const theme = useTheme();
 	const [open, setOpen] = React.useState(false);
-
 	const classes = useStyles()
 
 	useEffect(() => {
-
 		const elem = window.localStorage.getItem('usuario')
         const dato = elem ? JSON.parse(elem) : null
 
 		if(usuarioAutenticado || dato){
-
 			verificarAutenticada();
-
-			
 		}else{
             Swal.fire({
                 icon: 'error',
@@ -143,21 +141,12 @@ export const Facturacion = () => {
             }).then(function() {
                 navigate("/login");
             });
-            
             return <></>
         }
-
 	}, [])
-	
-	const handleSubmit = async (e) =>{
-		//setBody({...body,[e.target.name]: e.target.value});
-		//console.log("handleChange"+ body);
-		buttons('Perfil');
-        
-    };
+
 
 	const buttons = (type) =>{
-		
 		if(type === 'Perfil'){
 			Swal.fire({
 				icon: 'success',
@@ -167,12 +156,45 @@ export const Facturacion = () => {
 			})
 		}
 		if(type === 'Cerrar sesión'){
-			cerrarSecion();
-			navigate("/login");
+			Swal.fire({
+				title: 'Cerrando sesion',
+				timer: 2000,
+				timerProgressBar: true,
+				didOpen: () => {
+					Swal.showLoading()
+				}
+			}).then(() => {
+				cerrarSecion();
+				navigate("/login");
+			});
 		}
-        if(type === 'modulos'){
-            navigate("/dashboard");
-        }
+
+		if(type === 'Sobre PROVO.'){
+			Swal.fire({
+				title: 'Ingresando a soporte al cliente',
+				timer: 1000,
+				timerProgressBar: true,
+				didOpen: () => {
+					Swal.showLoading()
+				}
+			}).then(() => {
+				navigate("/ayuda");
+			});
+
+		}
+		if(type === 'Modulos'){
+			Swal.fire({
+				title: 'Redirigiendo a modulos del programa',
+				timer: 1000,
+				timerProgressBar: true,
+				didOpen: () => {
+					Swal.showLoading()
+				}
+			}).then(() => {
+				navigate("/dashboard");
+			});
+
+		}
 	}
 
 	const handleDrawerOpen = () => {
@@ -183,16 +205,13 @@ export const Facturacion = () => {
 		setOpen(false);
 	};
 
-
     let [creadoFactura, setCreadoFactura] = useState(false);
     const userContext = useContext(UserContext);
     const {usuarioAutenticado, verificarAutenticada, datoUsuario, cerrarSecion} = userContext;
-
     const facturacionContext = useContext(FacturacionContext);
     const {loading, facturas, obtenerFacturas, obtenerFacturaActiva} = facturacionContext
     
     useEffect(() => {
-
 		const elem = window.localStorage.getItem('usuario')
         const dato = elem ? JSON.parse(elem) : null
 
@@ -238,6 +257,7 @@ export const Facturacion = () => {
 
     return (
         <Box sx={{ display: 'flex' }}>
+			<Helmet><title>{TITLE}</title> </Helmet>
 			<CssBaseline />
 			<AppBar position="fixed" open={open} style={{ background: '#FFFFFF' }}>
 				<Toolbar >
@@ -254,7 +274,7 @@ export const Facturacion = () => {
 						<MenuIcon />
 					</IconButton>
 					<Typography variant="h5" noWrap component="div" className={classes.typography}>
-						Interfaz principal
+						Facturacion
 					</Typography>
 				</Toolbar>
 			</AppBar>
@@ -266,16 +286,16 @@ export const Facturacion = () => {
 				</DrawerHeader>
 				<Divider />
 				<List>
-					<ListItemButton onClick={(e) => handleSubmit(e)}>
+					<ListItemButton onClick={() => buttons('Perfil')}>
 						<ListItemIcon><AccountCircleIcon /></ListItemIcon>
 						<ListItemText primary="Perfil" /></ListItemButton>
-				<ListItemButton onClick={() => buttons('modulos')}>
+				<ListItemButton onClick={() => buttons('Modulos')}>
 					<ListItemIcon>
 					<ViewListIcon />
 					</ListItemIcon>
 					<ListItemText primary="Modulos" />
 				</ListItemButton>
-				<ListItemButton>
+				<ListItemButton onClick={() => buttons('Sobre PROVO.')}>
 					<ListItemIcon>
 					<ContactSupportIcon />
 					</ListItemIcon>
@@ -297,9 +317,6 @@ export const Facturacion = () => {
                             
                             <div className='contTitle'>
                                 <h1>FACTURACION</h1>
-                            </div>
-                            <div className='icon'>
-                                <img src='https://www.latercera.com/resizer/EFm8se8COcJZjqcvfvUkJ2PuOOk=/900x600/smart/arc-anglerfish-arc2-prod-copesa.s3.amazonaws.com/public/VAPOYBTRO5GF7G4XJ2NIMNC6KA.jpg' alt='.../' ></img>
                             </div>
                         </div>
                         <div className='cuerpoHF'>
