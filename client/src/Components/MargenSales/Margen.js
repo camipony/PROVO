@@ -28,8 +28,6 @@ import grafica1 from '../../assets/g1.jpg'
 import grafica2 from '../../assets/g2.png'
 import grafica3 from '../../assets/g3.png'
 import grafica4 from '../../assets/g4.jpg'
-import grafica5 from '../../assets/g5.png'
-import grafica6 from '../../assets/g6.png'
 
 /* Styles */
 import '../../Styles/MargeSales/margeSales.css'
