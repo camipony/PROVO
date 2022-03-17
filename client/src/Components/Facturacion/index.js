@@ -117,6 +117,8 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 export const Facturacion = () => {
 
+	const navigate = useNavigate();
+
     const theme = useTheme();
 	const [open, setOpen] = React.useState(false);
 
@@ -188,8 +190,6 @@ export const Facturacion = () => {
 
     const facturacionContext = useContext(FacturacionContext);
     const {loading, facturas, obtenerFacturas, obtenerFacturaActiva} = facturacionContext
-
-    const navigate = useNavigate();
     
     useEffect(() => {
 

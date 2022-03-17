@@ -9,7 +9,7 @@ import Login from './Components/Login/Login'
 import Home from './Components/Home/Home'
 import Register from './Components/Register/Register'
 import Inventario from './Components/Inventario/index'
-import Soporte from './Components/Soporte/App'
+import Soporte from './Components/Soporte/cuadros'
 /* State - Context */
 import FacturarionState from "./Context/Facturacion/FacturacionState";
 import UserState from "./Context/User/UserState";

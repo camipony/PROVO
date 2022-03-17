@@ -1,5 +1,51 @@
+.bodyCuadrosHelp{
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding-top: 70px;
+  overflow: hidden;
+}
+
+.containerCuadros{
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  overflow: hidden;
+  padding-bottom: 20px;
+}
+
+.row{
+  margin: 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  overflow: hidden;
+  overflow-y: auto;
+}
+
 .hide{
   display: none;
+}
+
+.textCuadro{
+  width: 100%;
+  display: auto;
+  visibility: visible;
+  padding: 10px;
+  opacity: 1;
+  
+}
+
+.textCuadro.active{
+  display: none;
+}
+
+.cuadro{
+  margin: 10px 0;
+  padding: 5px;
+  padding-bottom: 20px;
 }
 
 .cuadro:hover {

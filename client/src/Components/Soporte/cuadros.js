@@ -328,91 +328,77 @@ export default function Cuadros() {
 
   return (
     
-    <Container component="main" maxWidth="s">
-
-    <div className='container d-flex justify-content-center align-items-center h-100'>
-      <div className='row'> 
-        {
-          
-          cuadros.map(cuadro => (
-            <div className='col-md-4' key={cuadro.id}>
-              <Cuadro imageSource={cuadro.image} title ={cuadro.title} text ={cuadro.text} boton ={cuadro.boton} funci={cuadro.funci}/>
-             
-              </div>
-          ))
-        }
-        
-      </div>     
-    </div>
-
-      <Box sx={{ display: "flex" }}>
-        <CssBaseline />
-        <AppBar position="fixed" open={open} style={{ background: "#FFFFFF" }}>
-          <Toolbar>
-            <IconButton
-              className={classes.typography}
-              aria-label="open drawer"
-              onClick={handleDrawerOpen}
-              edge="start"
-              sx={{
-                marginRight: "36px",
-                ...(open && { display: "none" }),
-              }}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography
-              variant="h5"
-              noWrap
-              component="div"
-              className={classes.typography}
-            >
-              Soporte al cliente
-            </Typography>
-          </Toolbar>
-        </AppBar>
-        <Drawer variant="permanent" open={open}>
-          <DrawerHeader>
-            <IconButton onClick={handleDrawerClose}>
-              {theme.direction === "rtl" ? (
-                <ChevronRightIcon />
-              ) : (
-                <ChevronLeftIcon />
-              )}
-            </IconButton>
-          </DrawerHeader>
-          <Divider />
-          <List>
-            <ListItemButton onClick={() => buttons("Perfil")}>
-              <ListItemIcon>
-                <AccountCircleIcon />
-              </ListItemIcon>
-              <ListItemText primary="Perfil" />
-            </ListItemButton>
-            <ListItemButton onClick={() => buttons("Modulos")}>
-              <ListItemIcon>
-                <ViewListIcon />
-              </ListItemIcon>
-              <ListItemText primary="Modulos" />
-            </ListItemButton>
-            <ListItemButton onClick={() => buttons("Sobre PROVO.")}>
-              <ListItemIcon>
-                <ContactSupportIcon />
-              </ListItemIcon>
-              <ListItemText primary="Sobre PROVO." />
-            </ListItemButton>
-            <ListItemButton onClick={() => buttons("Cerrar sesión")}>
-              <ListItemIcon>
-                <LoginIcon />
-              </ListItemIcon>
-              <ListItemText primary="Cerrar sesión" />
-            </ListItemButton>
-          </List>
-          <Divider />
-        </Drawer>
-      </Box>
-      <Copyright sx={{ mt: 8, mb: 4 }} />
-    </Container>
+    <Box sx={{ display: 'flex' }}>
+			<CssBaseline />
+			<AppBar position="fixed" open={open} style={{ background: '#FFFFFF' }}>
+				<Toolbar >
+					<IconButton
+						className={classes.typography}
+						aria-label="open drawer"
+						onClick={handleDrawerOpen}
+						edge="start"
+						sx={{
+							marginRight: '36px',
+							...(open && { display: 'none' }),
+						}}
+					>
+						<MenuIcon />
+					</IconButton>
+					<Typography variant="h5" noWrap component="div" className={classes.typography}>
+						Interfaz principal
+					</Typography>
+				</Toolbar>
+			</AppBar>
+			<Drawer variant="permanent" open={open}>
+				<DrawerHeader>
+					<IconButton onClick={handleDrawerClose}>
+						{theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+					</IconButton>
+				</DrawerHeader>
+				<Divider />
+				<List>
+					<ListItemButton onClick={() => buttons('Perfil')}>
+						<ListItemIcon><AccountCircleIcon /></ListItemIcon>
+						<ListItemText primary="Perfil" /></ListItemButton>
+				<ListItemButton onClick={() => buttons('Modulos')}>
+					<ListItemIcon>
+					<ViewListIcon />
+					</ListItemIcon>
+					<ListItemText primary="Modulos" />
+				</ListItemButton>
+				<ListItemButton>
+					<ListItemIcon>
+					<ContactSupportIcon />
+					</ListItemIcon>
+					<ListItemText primary="Sobre PROVO." />
+				</ListItemButton>
+				<ListItemButton onClick={() => buttons('Cerrar sesión')}>
+					<ListItemIcon>
+					<LoginIcon />
+					</ListItemIcon>
+					<ListItemText primary="Cerrar sesión" />
+				</ListItemButton>
+				</List>
+				<Divider />			
+			</Drawer>
+			<Box component="main" sx={{ flexGrow: 1, p: 3 }} style={{padding:'0'}}>
+        <div className='bodyCuadrosHelp'>
+          <div className='containerCuadros'>
+            <div className='row'> 
+              {
+                cuadros.map(cuadro => (
+                  <div className='col-md-4' key={cuadro.id}>
+                    <Cuadro id={cuadro.id} imageSource={cuadro.image} title ={cuadro.title} text ={cuadro.text} boton ={cuadro.boton} funci={cuadro.funci}/>
+                    
+                  </div>
+                ))
+              }
+            </div>     
+          </div>
+        </div>
+            
+			</Box>
+		</Box>
   );
 }
 
