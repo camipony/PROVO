@@ -6,23 +6,23 @@
     format("truetype");
 }*/
 
-.homeBase{
+.homeBase {
   text-align: end;
   width: 100%;
 }
 
-.home{
-  width:60px;
-  height:60px;
+.home {
+  width: 60px;
+  height: 60px;
   background-color: transparent;
   padding-top: 3%;
   padding-right: 9%;
   border-style: none;
 }
 
-.homeIcon{
-  width:60px;
-  height:60px;
+.homeIcon {
+  width: 60px;
+  height: 60px;
   align-self: center;
   padding-top: 3%;
   padding-right: 9%;
@@ -34,33 +34,32 @@
   font-size: 2.5em;
   color: rgb(0, 0, 0);
   padding-top: 4%;
-  
 }
 
-.insertarD{
+.insertarD {
   text-align: center;
   width: 100%;
 }
 
-.insert{
+.insert {
   font: small-caps 100%/200% serif;
   font-size: 2em;
   text-align: center;
   background-color: transparent;
   border-style: none;
   padding-top: 0.5%;
-  size:100px;
+  size: 100px;
 }
 
 .inventario {
-  width: 90%;
-  height: 800px;
+  width: 1000%;
+  height: 700px;
   /*flex: 4;*/
   margin-bottom: 10px;
-  margin-top: 12px;
-  margin-left: 5%;
- border-radius: 20px 20px 20px 20px;
-  border: 5px inset black;
+  margin-top: 100px;
+  margin-right: 8%;
+  border-radius: 20px 20px 20px 20px;
+  border: 5px inset rgb(255, 255, 255);
 }
 
 /*.menu1 {
@@ -69,7 +68,7 @@
   background-color: #084ac3;
 }*/
 
-.inputprod{
+.inputprod {
   align-items: center;
   text-align: center;
   align-content: center;
@@ -77,10 +76,9 @@
   align-tracks: center;
 }
 
-.fin{
+.fin {
   width: 100%;
   columns: 2;
-
 }
 
 .piePagina {
@@ -88,9 +86,15 @@
   margin-right: 35%;
 }
 
-.provo{
-  width:230px;
-  height:150;
+.provo {
+  width: 230px;
+  height: 150;
   float: right;
   margin-right: 5%;
+}
+
+th,
+td {
+  color: aliceblue;
+  font-size: 23px;
 }
