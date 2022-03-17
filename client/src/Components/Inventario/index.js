@@ -23,16 +23,6 @@ export default class index extends Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
-  callAPI() {
-    fetch("https://provo-backend.herokuapp.com/testAPI")
-      .then((res) => res.text())
-      .then((res) => this.setState({ apiResponse: res }));
-  }
-
-  componentWillMount() {
-    this.callAPI();
-  }
-
   handleClick() {
     this.setState((prevState) => ({
       isToggleOn: !prevState.isToggleOn,
@@ -74,7 +64,6 @@ export default class index extends Component {
 
         {/* <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="funcion.js"></script> */}
-        <p className="App-intro">;{this.state.apiResponse}</p>
       </>
     );
   }

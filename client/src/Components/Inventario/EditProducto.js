@@ -1,31 +1,42 @@
 import React, { Fragment, useState } from "react";
 
+import '../../Styles/Inventario/ModalProductos.css';
+
 const EditProducto = (props) => {
 
-  const [nombre, setNombre] = useState(props.todo ? props.todo.nombre : '' );
+  const [nombre, setNombre] = useState(props.todo.nombre ? props.todo.nombre : 'Juan');
+
+  let [actiModal, setActiveModal] = useState(false);
 
   //edit description function
+
+  const onOffModal = () => {
+    setActiveModal(!actiModal)
+  }
 
   const updateNombre= async e => {
     e.preventDefault();
     try {
       const body = {
         nombre: nombre,
-        precio: props.todoprecio, 
-        descripcion: props.tododescripcion, 
+        precio: props.todo.precio, 
+        descripcion: props.todo.descripcion, 
         categoria: props.todo.categoria, 
         cantidad: props.todo.cantidad_exitente_producto
       };
-      const response = await fetch(
+      console.log(body)
+      await fetch(
         `https://provo-backend.herokuapp.com/productos/${props.todo.id}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(body)
         }
-      );
+      ).then(() => {
+        window.location = "/productos";
+      });
 
-      window.location = "/productos";
+      //
     } catch (err) {
       console.error(err.message);
     }
@@ -38,15 +49,13 @@ const EditProducto = (props) => {
         className="btn btn-warning"
         data-toggle="modal"
         data-target={`#id${props.todo.id}`}
+        onClick={onOffModal}
       >
         Edit
       </button>
 
-      {/* 
-        id = id10
-      */}
       <div
-        className="modal"
+        className={actiModal ? 'modalContainerProduct' : "modalOff"}
         id={`id${props.todo.id}`}
         onClick={() => setNombre(props.todo.nombre)}
       >
@@ -58,7 +67,7 @@ const EditProducto = (props) => {
                 type="button"
                 className="close"
                 data-dismiss="modal"
-                onClick={() => setNombre(props.todo.nombre)}
+                onClick={() => onOffModal()}
               >
                 &times;
               </button>
@@ -78,7 +87,11 @@ const EditProducto = (props) => {
                 type="button"
                 className="btn btn-warning"
                 data-dismiss="modal"
-                onClick={e => updateNombre(e)}
+                onClick={e => {
+                    updateNombre(e)
+                    onOffModal()
+                  }
+                }
               >
                 Edit
               </button>
@@ -86,7 +99,7 @@ const EditProducto = (props) => {
                 type="button"
                 className="btn btn-danger"
                 data-dismiss="modal"
-                onClick={() => setNombre(props.todo.nombre)}
+                onClick={onOffModal}
               >
                 Close
               </button>

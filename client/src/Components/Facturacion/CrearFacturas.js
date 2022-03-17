@@ -85,8 +85,8 @@ export default function CrearFacturas(props) {
     updateFactura(factura.id, {activa: false})
     confirmarCompraFactura(usuario.id)
     Swal.fire({
-      icon: 'error',
-      title: ' Debes iniciar secion ',
+      icon: 'success',
+      title: 'Compra finalizada',
       showConfirmButton: false,
       timer: 3000,
     }).then(function() {

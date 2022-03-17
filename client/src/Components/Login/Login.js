@@ -153,11 +153,14 @@ const Login = () => {
 				<div className="title">¡Bienvenido a provo!</div>
 				<br></br>
 					<Box sx={{ ...commonStyles }} >
-						<div className={classes.div}>
-							<span className="cout">
+						<div className='contFormLogin'>
+							{/*<span className="cout">
 								<div className="cins"></div>
-							</span>
-							<form className={classes.form}>
+							</span>*/}
+							<div className='contIconLogin'>
+								<ion-icon name="person-circle-outline"></ion-icon>
+							</div>
+							<form>
 								<TextField
 									fullWidth
 									AutoFocused

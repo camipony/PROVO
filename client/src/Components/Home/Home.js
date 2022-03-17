@@ -224,7 +224,7 @@ export default function Home() {
 	const images = [
 		{
 			url: inventory,
-			title: 'Inventario',
+			title: 'Facturacion',
 			width: '188px',
 
 		},
@@ -268,7 +268,7 @@ export default function Home() {
 
 	const toFunction = (title) => {
 		console.log(title);
-		if(title === 'Inventario'){
+		if(title === 'Facturacion'){
 			navigate("/facturacion");
 		}else if(title === 'Productos'){
 			navigate("/productos");
