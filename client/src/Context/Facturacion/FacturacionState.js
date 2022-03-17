@@ -8,6 +8,7 @@ const FacturarionState = (props) => {
     const inicialState = {
         facturas: [],
         dtfacturaActiva: [],
+        itemFacturaActiva: [],
         loadingActive: false,
         facturaActiva: false,
         loading: false
@@ -76,7 +77,10 @@ const FacturarionState = (props) => {
         try{
 
             await axios.delete('https://provo-backend.herokuapp.com/item-facturas/'+id);
-
+            dispatch({
+                type: 'ELIMINAR_ITEM',
+                payload: id
+            })
         } catch (error) {
             console.log(error);
         }
@@ -96,6 +100,15 @@ const FacturarionState = (props) => {
         try{
 
             await axios.put('https://provo-backend.herokuapp.com/item-facturas/'+id, newProduct);
+            const dato = {
+                id: id,
+                cantidad: newProduct.cantidad_producto
+            }
+
+            dispatch({
+                type: 'ACTUALIZAR_ITEM',
+                payload: dato
+            })
 
         } catch (error) {
             console.log(error);
@@ -124,6 +137,7 @@ const FacturarionState = (props) => {
             dtfacturaActiva: state.dtfacturaActiva,
             facturaActiva: state.facturaActiva,
             loading: state.loading,
+            itemFacturaActiva: state.itemFacturaActiva,
             obtenerFacturas,
             addItemFactura,
             deleteItemFactura,

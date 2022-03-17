@@ -22,6 +22,7 @@ export default function CrearFacturas(props) {
     updateItemFactura, 
     updateFactura, 
     dtfacturaActiva, 
+    itemFacturaActiva,
     obtenerFacturaActiva, 
     confirmarCompraFactura,
     deleteItemFactura
@@ -41,13 +42,15 @@ export default function CrearFacturas(props) {
     
     if( dtfacturaActiva ){
       setFactura(dtfacturaActiva[0])
-      setList( dtfacturaActiva[0].item )
+      setList( itemFacturaActiva )
     }
     
     if( factura !== null && !confirmarCompra ){
       updateFactura(factura.id, {activa: true})
     }
-  }, [obtenerFacturaActiva, usuario.id, dtfacturaActiva, factura, confirmarCompra, updateFactura])
+
+  }, [obtenerFacturaActiva, usuario.id, dtfacturaActiva, factura, confirmarCompra, updateFactura, itemFacturaActiva])
+
     
 
   const obtenerFecha = () => {
