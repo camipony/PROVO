@@ -86,7 +86,7 @@ const Register = () => {
                 type="text" 
                 placeholder="Nombre"
                 value={register.nombre}
-            ></input>
+                required></input>
             <input 
                 name='username'  
                 onChange={handleChange} 
@@ -94,7 +94,7 @@ const Register = () => {
                 type="text" 
                 placeholder="Usuario"
                 value={register.username}
-            ></input>
+                required></input>
             <input 
                 name='email'  
                 onChange={handleChange} 
@@ -102,7 +102,7 @@ const Register = () => {
                 type="email" 
                 placeholder="Correo"
                 value={register.email}
-            ></input>
+                required></input>
             <input 
                 name='password'  
                 onChange={handleChange} 
@@ -110,7 +110,7 @@ const Register = () => {
                 type="password" 
                 placeholder="Contraseña"
                 value={register.password}
-            ></input>
+            required></input>
             <button className="button">Registrarme</button>
        </form>
        <p className="Register__container--registro"><a href="/login">¿Ya tienes cuenta?Inicia sesion</a></p>
