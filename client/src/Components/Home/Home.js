@@ -179,6 +179,7 @@ const ImageMarked = styled('span')(({ theme }) => ({
 
 
 export default function Home() {
+	
 	const theme = useTheme();
 	const [open, setOpen] = React.useState(false);
 

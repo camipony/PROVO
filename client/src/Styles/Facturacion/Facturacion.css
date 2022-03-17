@@ -1,15 +1,20 @@
+.css-zxdg2z{
+    padding: 0;
+}
+
 .bodyHomeFacturaa{
     width: 100%;
     height: 100vh;
     display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
+    justify-content: flex-end;
+    align-items: flex-end;
     flex-direction: row;
+    overflow: hidden;
 }
 
 .bodyHF{
     width: 100%;
-    height: 100%;
+    height: calc(100% - 70px);
 }
 
 .headerHF{
