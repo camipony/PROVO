@@ -214,12 +214,6 @@ export default function Home() {
 
 	}, [])
 	
-	const handleSubmit = async (e) =>{
-		//setBody({...body,[e.target.name]: e.target.value});
-		//console.log("handleChange"+ body);
-		buttons('Perfil');
-        
-    };
 
 	/** For the Buttons */
 	const images = [
@@ -264,6 +258,13 @@ export default function Home() {
 		if(type === 'Cerrar sesión'){
 			cerrarSecion();
 			navigate("/login");
+		}
+
+		if(type === 'Sobre PROVO.'){
+			navigate("/ayuda");
+		}
+		if(type === 'Modulos'){
+			navigate("/dashboard");
 		}
 	}
 
@@ -319,16 +320,16 @@ export default function Home() {
 				</DrawerHeader>
 				<Divider />
 				<List>
-					<ListItemButton onClick={(e) => handleSubmit(e)}>
+					<ListItemButton  onClick={() => buttons('Perfil')}>
 						<ListItemIcon><AccountCircleIcon /></ListItemIcon>
 						<ListItemText primary="Perfil" /></ListItemButton>
-				<ListItemButton>
+				<ListItemButton onClick={() => buttons('Modulos')}>
 					<ListItemIcon>
 					<ViewListIcon />
 					</ListItemIcon>
 					<ListItemText primary="Modulos" />
 				</ListItemButton>
-				<ListItemButton>
+				<ListItemButton onClick={() => buttons('Sobre PROVO.')}>
 					<ListItemIcon>
 					<ContactSupportIcon />
 					</ListItemIcon>
