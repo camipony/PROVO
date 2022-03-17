@@ -22,7 +22,7 @@ import ListItemText from '@mui/material/ListItemText';
 import { makeStyles } from '@material-ui/core/styles';
 import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
-
+import { Helmet } from 'react-helmet'
 /* Imagenes */
 import grafica1 from '../../assets/g1.jpg'
 import grafica2 from '../../assets/g2.png'
@@ -36,6 +36,8 @@ import '../../Styles/MargeSales/mediaMargeSales.css'
 /* Context */
 import UserContext from '../../Context/User/UserContext';
 
+/** Constantes */
+const TITLE = 'Margen de ventas'
 const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({
@@ -216,6 +218,7 @@ export const MargenSales = () => {
 	};
 
   return <Box sx={{ display: 'flex' }}>
+    <Helmet><title>{TITLE}</title> </Helmet>
     <CssBaseline />
     <AppBar position="fixed" open={open} style={{ background: '#FFFFFF' }}>
       <Toolbar >
